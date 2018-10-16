@@ -7,6 +7,13 @@
     <div class="clearfix"></div>
 @endsection
 
+@section('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+@endsection
+
 @section('content')
 
     @include("partials/question")
@@ -115,4 +122,21 @@
 
         @parent
     @endsection
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+var simplemde = new SimpleMDE({
+        renderingConfig: {
+                codeSyntaxHighlighting: true,
+        },
+        showIcons: ["code", "table"]
+});
+</script>
+
 @endsection

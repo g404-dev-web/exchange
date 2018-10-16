@@ -7,6 +7,12 @@
     @include('partials/search')
 @endsection
 
+@section('styles')
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+
+@endsection
+
 @section('content')
 
     <div class="tabs-warp question-tab">
@@ -30,7 +36,7 @@
                         </div>
                         <div class="question-inner">
                             <div class="clearfix"></div>
-                            <p class="question-desc">{{ $question->description }}</p>
+                            <p class="question-desc">{!! $question->description !!}</p>
                             {{--<div class="question-details">--}}
                                 {{--<span class="question-answered question-answered-done"><i class="icon-ok"></i>solved</span>--}}
                             {{--</div>--}}
@@ -71,3 +77,11 @@
     @endsection
 
 @endsection
+
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+@endsection
+

@@ -59,5 +59,8 @@
         <script src="{{ asset('public/js/jquery.bxslider.min.js') }}"></script>
         <script src="{{ asset('public/js/custom.js') }}"></script>
         <!-- End js -->
+
+        @yield('scripts')
+
     </body>
 </html>

@@ -9,6 +9,7 @@ use App\Http\Requests\StoreQuestion;
 use App\Repositories\AnswerRepository;
 use App\Repositories\QuestionRepository;
 use Auth;
+use Parsedown;
 
 class QuestionController extends Controller
 {
@@ -31,6 +32,12 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = $this->questionRepository->getOrdered();
+
+        foreach($questions as $question) {
+                $question->description = $Parsedown->text($question->description);
+        }
+
+
         $recentQuestions = $this->questionRepository->getRecent(2);
 //        $nbrAnswers = $answerRepository->getNbrAnswers($id);
 
@@ -82,6 +89,14 @@ class QuestionController extends Controller
 
         $userQuestionPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('question_id')->all() : [];
         $userAnswerPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('answer_id')->all() : [];
+
+	$Parsedown = new Parsedown();
+
+	$question->description = $Parsedown->text($question->description);
+
+	foreach($answers as $answer) {
+		$answer->description = $Parsedown->text($answer->description);
+	}
 
         return view('question.show', compact(
             'question', 'answers', 'nbrAnswers', 'nextQuestionId', 'previousQuestionId', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes'
