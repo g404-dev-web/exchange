@@ -33,6 +33,8 @@ class QuestionController extends Controller
     {
         $questions = $this->questionRepository->getOrdered();
 
+	$Parsedown = new Parsedown();
+
         foreach($questions as $question) {
                 $question->description = $Parsedown->text($question->description);
         }

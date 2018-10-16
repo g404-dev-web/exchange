@@ -21,4 +21,11 @@
 <!-- Favicons -->
 <link rel="shortcut icon" href="public/images/favicon.png">
 
+<style>
+	code {
+    background: #eee;
+    padding: 2px 5px;
+	}
+</style>
+
 @yield('styles')
