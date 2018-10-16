@@ -51,7 +51,7 @@
                             </div>
                             {{--<a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a>--}}
                         </div>
-                        <div class="text"><p>{{ $answer->description }}</p>
+                        <div class="text"><p>{!! nl2br($answer->description) !!}</p>
                         </div>
                         {{--<div class="question-answered question-answered-done"><i class="icon-ok"></i>Best Answer</div>--}}
                     </div>

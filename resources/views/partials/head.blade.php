@@ -21,3 +21,4 @@
 <!-- Favicons -->
 <link rel="shortcut icon" href="public/images/favicon.png">
 
+@yield('styles')

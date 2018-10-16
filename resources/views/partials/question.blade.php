@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="question-desc">
-            {{ $question->description }}
+            {!! nl2br($question->description) !!}
         </div>
         <!--<div class="question-details">
             <span class="question-answered question-answered-done"><i class="icon-ok"></i>Résolu</span>

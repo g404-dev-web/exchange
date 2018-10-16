@@ -2,6 +2,10 @@
 
 @section('title', 'Poser une question')
 
+@section('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+@endsection
+
 @section('content')
 
     <div class="page-content ask-question">
@@ -102,4 +106,11 @@
         </div>
     </div><!-- End page-content -->
 
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+var simplemde = new SimpleMDE();
+</script>
 @endsection
