@@ -19,7 +19,7 @@ class QuestionRepository extends Repository
 
     public function getOrdered()
     {
-        $questions = $this->model->with('answers')
+        $questions = $this->model->with('answers', 'upvotes', 'user')
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -31,7 +31,7 @@ class QuestionRepository extends Repository
 
     public function getNotAnswered()
     {
-        $questions =  $this->model->with('answers')
+        $questions =  $this->model->with('answers', 'upvotes', 'user')
             ->whereNotExists(function (Builder $query) {
                 $query->select("answers.question_id")
                     ->from('answers')
@@ -49,7 +49,10 @@ class QuestionRepository extends Repository
 
     public function getRecent($nbr)
     {
-        $questions = $this->model->orderBy('updated_at', 'desc')->take($nbr)->get();
+        $questions = $this->model
+            ->orderBy('updated_at', 'desc')
+            ->take($nbr)
+            ->get();
 
         $this->parseDescription($questions);
 
@@ -58,7 +61,7 @@ class QuestionRepository extends Repository
 
     public function getUserQuestions($userId)
     {
-        $questions = $this->model->with('answers')
+        $questions = $this->model->with('answers', 'upvotes', 'user')
             ->orderBy('created_at', 'desc')
             ->where('user_id', $userId)
             ->get();

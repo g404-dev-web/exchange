@@ -43,6 +43,7 @@
                     <li class="{{ Request::is('questions/user') ? 'current_page_item' : '' }}">
                         <a href="{{ route('questions.user') }}">Mes questions</a>
                     </li>
+
                     @if($currentUser->is_admin)
                         <li><a href="{{ route('admin.users') }}">Users</a></li>
                     @endif
