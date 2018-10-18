@@ -23,9 +23,11 @@
 
 <style>
 	code {
-    background: #eee;
-    padding: 2px 5px;
+            background: #eee;
+	    padding: 2px 5px;
 	}
+
+
 </style>
 
 @yield('styles')

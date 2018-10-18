@@ -13,6 +13,9 @@ class AnswerController extends Controller
 
     public function __construct(AnswerRepository $answerRepository)
     {
+
+        parent::__construct();
+
         //$this->answerRepository = new AnswerRepository();
         $this->answerRepository = $answerRepository;
     }
@@ -31,6 +34,9 @@ class AnswerController extends Controller
         $requestData = $request->all();
 
         $this->answerRepository->create($requestData);
+
+        $this->currentUser->points += 5;
+        $this->currentUser->save();
 
         return redirect()->route('questions.show', ['id' => $request->get('question_id')]);
     }

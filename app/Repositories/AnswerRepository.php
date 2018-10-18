@@ -12,11 +12,21 @@ class AnswerRepository extends Repository
 
     public function getOrdered($questionId)
     {
-        return $this->model->withCount('upvotes')->with('user')->where('question_id', $questionId)->orderBy('upvotes_count', 'desc')->get();
+        return $this->model->withCount('upvotes')->with('user')
+            ->where('question_id', $questionId)
+            ->orderBy('is_selected', 'desc')
+            ->orderBy('upvotes_count', 'desc')
+            ->get();
     }
 
     public function count($questionId)
     {
         return $this->model->where('question_id', $questionId)->count();
+    }
+
+    public function getUserAnswersCount($userId)
+    {
+
+        return $this->model->where('user_id', $userId)->count();
     }
 }

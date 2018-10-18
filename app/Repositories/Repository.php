@@ -1,11 +1,13 @@
 <?php namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\Interfaces\RepositoryInterface;
 
 class Repository implements RepositoryInterface
 {
     // model property on class instances
+    /** @var Builder  */
     protected $model;
 
     // Constructor to bind model to repo

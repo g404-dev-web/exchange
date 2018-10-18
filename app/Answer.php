@@ -25,7 +25,7 @@ class Answer extends Model
      *
      * @var array
      */
-    protected $fillable = ['description', 'answer_id', 'question_id', 'user_id'];
+    protected $fillable = ['description', 'answer_id', 'question_id', 'user_id', 'is_selected'];
 
     /**
      * Attributes for timestamps

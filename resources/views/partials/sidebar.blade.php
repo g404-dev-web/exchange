@@ -2,8 +2,16 @@
     <h3 class="widget_title">Stats</h3>
     <div class="ul_list ul_list-icon-ok">
         <ul>
-            <li><i class="icon-question-sign"></i>Questions ( <span>{{ \App\Question::count() }}</span> )</li>
-            <li><i class="icon-comment"></i>Answers ( <span>{{ \App\Answer::count() }}</span> )</li>
+            <li>
+                <i class="icon-question-sign"></i>Questions (
+                    <span>{{ isset($questionsCount) ? $questionsCount : \App\Question::count() }}</span>
+                )
+            </li>
+            <li>
+                <i class="icon-comment"></i>Réponses (
+                    <span>{{ isset($answersCount) ? $answersCount : \App\Answer::count() }}</span>
+                )
+            </li>
         </ul>
     </div>
 </div>

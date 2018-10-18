@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('questions/user', 'QuestionController@user')->name('questions.user');
 Route::resource('questions', 'QuestionController')->only([
     'index', 'create', 'store', 'show'
 ]);
@@ -23,6 +24,7 @@ Route::resource('answers', 'AnswerController')->only([
     'store'
 ]);
 
+Route::post('upvotes/select', 'UpvoteController@select');
 Route::resource('upvotes', 'UpvoteController')->only([
     'store'
 ]);

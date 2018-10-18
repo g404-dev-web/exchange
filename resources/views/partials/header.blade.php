@@ -30,21 +30,23 @@
                     <a href="{{ url('/') }}">Accueil</a>
                 </li>
                 <li class="{{ Request::is('questions/create') ? 'current_page_item' : '' }}">
-                    @if (Auth::guest())
                         <a href="{{ url('/login') }}">Poser une question</a>
-                    @else
-                        <a href="{{ url('/questions/create') }}">Poser une question</a>
-                    @endif
                 </li>
-                <li class="">
-                    <a href="{{ route('questions.index') }}">Questions</a>
+                <li class="{{ Request::is('questions') ? 'current_page_item' : '' }}">
+                    <a href="{{ route('questions.index') }}">Donner une réponse</a>
                 </li>
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/login') }}">Connexion</a></li>
                 @else
-                    <li><a href="{{ url('/logout') }}">Logout</a></li>
+                    <li class="{{ Request::is('questions/user') ? 'current_page_item' : '' }}">
+                        <a href="{{ route('questions.user') }}">Mes questions</a>
+                    </li>
+                    <li><a href="{{ url('/logout') }}">Déconnexion</a></li>
                 @endif
             </ul>
         </nav>
-    </section><!-- End container -->
+	@if($currentUser)
+        <div style="color: #fff;font-size: 10px;position: absolute;right: 5px;bottom: 0;">Vous avez {{ $currentUser->points }} points de karma</div>
+	@endif    
+</section><!-- End container -->
 </header><!-- End header -->

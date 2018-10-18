@@ -1,21 +1,31 @@
 <article class="question single-question question-type-normal">
-    <h2>
-        <span class="color">{{ $question->title }}</span>
-    </h2>
+    {!!   $routeIsQuestionShow ? '':'<a href="/questions/'.$question->id.'">' !!}
+        <h2>
+            <span class="color">{{ $question->title }}</span>
+        </h2>
+    {!!  $routeIsQuestionShow ? '':'</a>' !!}
     <div class="question-author-date">
-        Requête effectuée <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
+        <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
     </div>
     <div class="question-inner">
         <div class="clearfix"></div>
         <div class="comment-vote">
-
             <ul class="question-vote">
-                <li>
-                    {!! Form::open(['action' => 'UpvoteController@store', 'method' => 'post']) !!}
-                    {!! Form::hidden('question_id', $question->id) !!}
-                    {!! Form::submit('+1', ['class' => 'question-vote-up', "disabled" => in_array($question->id, $userQuestionPreviousVotes)]) !!}
-                    {!! Form::close() !!}
-                </li>
+
+                @if(in_array($question->id, $userQuestionPreviousVotes))
+                    <li>
+                        <input type="submit" value="▲"
+                               class="question-vote-up tooltip-n"
+                               title='Vous avez déjà upvoté cette question'>
+                    </li>
+                @else
+                    <li>
+                        {!! Form::open(['action' => 'UpvoteController@store', 'method' => 'post']) !!}
+                        {!! Form::hidden('question_id', $question->id) !!}
+                        {!! Form::submit('▲', ['class' => 'question-vote-up']) !!}
+                        {!! Form::close() !!}
+                    </li>
+                @endif
                 <!--<li><a href="#" class="question-vote-down" title="Dislike"></a></li>!-->
             </ul>
 
@@ -30,7 +40,11 @@
             <span class="question-answered question-answered-done"><i class="icon-ok"></i>Résolu</span>
         </div>
         -->
-        <span class="question-comment"><a href="#commentlist"><i class="icon-comment"></i>{{ $nbrAnswers }} Réponse(s)</a></span>
+        <span class="question-comment"><a href="/questions/{{$question->id}}#commentlist"><i class="icon-comment"></i>{{ count($question->answers) }} Réponse(s)</a></span>
+        <span class="question-view">👁 {{ $question->views }} vues</span>
+        @if($question->hasSelectedAnswer)
+            <span class="question-answered">✔️ Solution trouvée</span>
+        @endif
         <!--<span class="question-view"><i class="icon-user"></i>70 views</span>!-->
         <div class="question-tags"><i class="icon-tags"></i>
             <a href="#!">{{ $question->category }}</a>

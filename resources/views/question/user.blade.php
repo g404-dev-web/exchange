@@ -1,6 +1,6 @@
 @extends('layouts.2-columns')
 
-@section('title', 'Poser une question')
+@section('title', 'Mes questions')
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
@@ -17,7 +17,6 @@
 
 {{-- Sidebar --}}
 @section('sidebar')
-    @include("partials/recent-questions")
     @parent
 @endsection
 
