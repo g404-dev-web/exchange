@@ -31,3 +31,5 @@ Route::resource('upvotes', 'UpvoteController')->only([
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 
+Route::get('/admin/users',  'AdminController@users')->name('admin.users' );
+Route::get('/admin/users/{id}/login',  'AdminController@userLogin')->name('admin.user.login' );

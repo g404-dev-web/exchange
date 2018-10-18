@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
 
-        <title>Exchange – @yield('title')</title>
+        <title>@yield('title') - Exchange</title>
 
         @include('partials/head')
 
