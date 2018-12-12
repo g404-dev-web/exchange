@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- Main Style -->
-<link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 
 <!-- Skins -->
-<link href="{{ asset('public/css/skins/skins.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/skins/skins.css') }}" rel="stylesheet">
 
 <!-- Responsive Style -->
-<link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/responsive.css') }}" rel="stylesheet">
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="public/images/favicon.png">
