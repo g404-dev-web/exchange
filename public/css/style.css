@@ -5278,3 +5278,11 @@ li.select-answer input{
 	font-size: 56px;
 	color: #2ccc73;
 }
+
+.comment-text .text p {
+	font-size:14px;
+}
+.comment-text .text li {
+	list-style: square;
+	margin-left: 20px;
+}
