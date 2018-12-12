@@ -15,26 +15,26 @@ class CreateForeignKeys extends Migration
     {
         Schema::table('questions', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
         Schema::table('answers', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
             $table->foreign('answer_id')->references('id')->on('answers')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
             $table->foreign('question_id')->references('id')->on('questions')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
         Schema::table('upvotes', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
             $table->foreign('answer_id')->references('id')->on('answers')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
     }
