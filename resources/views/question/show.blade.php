@@ -89,7 +89,7 @@
                                 <div class="date"><i class="icon-time"></i>{{ $answer->created_at }}</div>
                             </div>
 
-                            <div class="text"><p>{!! $answer->description !!}</p>
+                            <div class="text"><p>{!! strip_tags($answer->description, '<a><b><blockquote><code><del><dd><dl><dt><em><h1><h2><h3><i><kbd><li><ol><p><pre><s><sup><sub><strong><strike><ul><br><hr>')!!}</p>
                             </div>
                             {{--<div class="question-answered question-answered-done"><i class="icon-ok"></i>Best Answer</div>--}}
                         </div>

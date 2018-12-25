@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="question-desc">
-            {!! $question->description !!}
+            {!! strip_tags($question->description, '<a><b><blockquote><code><del><dd><dl><dt><em><h1><h2><h3><i><kbd><li><ol><p><pre><s><sup><sub><strong><strike><ul><br><hr>') !!}
         </div>
         <!--<div class="question-details">
             <span class="question-answered question-answered-done"><i class="icon-ok"></i>Résolu</span>
