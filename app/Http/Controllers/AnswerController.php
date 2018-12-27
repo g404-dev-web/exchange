@@ -38,7 +38,9 @@ class AnswerController extends Controller
         $this->currentUser->points += 5;
         $this->currentUser->save();
 
-        return redirect()->route('questions.show', ['id' => $request->get('question_id')]);
+        return redirect()
+            ->route('questions.show', ['id' => $request->get('question_id')])
+            ->with('flash_message', 'Answer added!');
     }
 
 }

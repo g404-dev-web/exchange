@@ -1,5 +1,5 @@
 <article class="question single-question question-type-normal">
-    {!!   $routeIsQuestionShow ? '':'<a href="/questions/'.$question->id.'">' !!}
+    {!!   $routeIsQuestionShow ? '':'<a href="'.url('/questions/'.$question->id).'">' !!}
         <h2>
             <span class="color">{{ $question->title }}</span>
         </h2>

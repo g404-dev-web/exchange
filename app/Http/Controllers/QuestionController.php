@@ -88,7 +88,9 @@ class QuestionController extends Controller
         $this->currentUser->points += 10;
         $this->currentUser->save();
 
-        return redirect()->route('questions.show', ['id' => $question->id])->with('flash_message', 'Question added!');
+        return redirect()
+            ->route('questions.show', ['id' => $question->id])
+            ->with('flash_message', 'Question added!');
     }
 
     /**
