@@ -3,3 +3,4 @@ composer.lock
 .env
 .idea
 node_modules
+/storage/*.index

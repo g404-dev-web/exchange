@@ -9,8 +9,10 @@
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "laravel/scout": "^6.1",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "teamtnt/laravel-scout-tntsearch-driver": "^6.1"
     },
     "require-dev": {
         "appzcoder/crud-generator": "^3.0",

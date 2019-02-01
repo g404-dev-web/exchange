@@ -1,19 +1,17 @@
 @extends('layouts.fullwidth')
 
-@section('title', 'Users - Admin ')
-
 @section('styles')
+
 @endsection
-
-
 @section('content')
-    <table class="table table-striped table-responsive">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Email</th>
                 <th scope="col">Connexion</th>
+                <th scope="col">Suppression</th>
             </tr>
         </thead>
         <tbody>
@@ -23,12 +21,10 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td><a href="/admin/users/{{$user->id}}/login">👤</a></td>
+                    <td><a href="/admin/users/{{$user->id}}/delete">X</a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 @endsection
 
-
-@section('scripts')
-@endsection

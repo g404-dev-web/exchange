@@ -9,12 +9,15 @@
                         <br>Sois rassuré.e, ici tu es libre de poser la question que tu veux, une réponse fiable et de confiance te sera faite par un.e autre apprenant.e, un.e ancien.ne Simplonien.ne ou un formateur.
                         <br><b>N'attend plus, pose ta question dès maintenant !</b>
                     </p>
-                    <form class="form-style form-style-2">
-                        <p>
-                            <input type="text" id="question_title" value="Recherche une question, tu es sur de trouver une réponse." onfocus="if(this.value=='Recherche une question, tu es sur de trouver une réponse.')this.value='';" onblur="if(this.value=='')this.value='Recherche une question, tu es sur de trouver une réponse.';">
-                            <i class="icon-pencil"></i>
-                            <span class="color button small publish-question">Rechercher</span>
-                        </p>
+                    <form action="questions/search" method="post" class="form-style form-style-2">
+                        {{ csrf_field() }}
+                        <div class="form-style form-style-2">
+                            <p>
+                                <input type="text" id="question_title" name="search" value="Recherche une question, tu es sur de trouver une réponse." onfocus="if(this.value=='Recherche une question, tu es sur de trouver une réponse.')this.value='';" onblur="if(this.value=='')this.value='Recherche une question, tu es sur de trouver une réponse.';">
+                                <i class="icon-pencil"></i>
+                                <span class="color button small publish-question">Rechercher</span>
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div><!-- End row -->

@@ -29,4 +29,9 @@ class AnswerRepository extends Repository
 
         return $this->model->where('user_id', $userId)->count();
     }
+
+    public function deleteAnswerById($answerId)
+    {
+        return $this->model->where('id', $answerId)->delete();
+    }
 }

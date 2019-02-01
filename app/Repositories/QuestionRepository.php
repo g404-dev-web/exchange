@@ -94,6 +94,11 @@ class QuestionRepository extends Repository
     {
         return $this->model->where('id', '>', $id)->min('id');
     }
+    
+    public function deleteQuestionById($questionId)
+    {
+        return $this->model->where('id', $questionId)->delete();
+    }
 
     private function parseDescription(&$questions)
     {

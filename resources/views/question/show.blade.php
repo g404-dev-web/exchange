@@ -29,15 +29,23 @@
         </p>
     </div><!-- End post-next-prev -->
 
-
     <div id="commentlist" class="page-content">
         <div class="boxedtitle page-title"><h2>Réponses ( <span class="color">{{ $nbrAnswers }}</span> )</h2></div>
         <ol class="commentlist clearfix">
             @forelse($answers as $answer)
                 <li class="comment" id="comment-{{$answer->id}}">
                     <div class="comment-body comment-body-answered clearfix">
+                        @if(Auth::check() && Auth::user()->is_admin == 1)
+                        <form method="POST" action=" {{route('deleteAnswer')}} ">
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{$answer->id}}" name="answerId">
+                            <button type="submit" class="button question-report delete-button ">Supprimer</button>
+                        </form>
+                        @endif
                         <div class="comment-text">
+                                
                             <div class="author clearfix">
+                                   
                                 <div class="comment-author">
                                     <span class="color">{{ $answer->user->name }}</span>
                                 </div>
@@ -83,6 +91,8 @@
                                     </div>
                                 </div>
                                 {{--<a class="comment-reply" href="#"><i class="icon-reply"></i>Reply</a>--}}
+                                
+                            
                             </div>
                             <div class="comment-meta">
                                 <a href="#comment-{{$answer->id}}" style="float: right;font-size: 12px;position: relative;top: 5px;margin-left: 10px;">🔗</a>
@@ -101,7 +111,6 @@
             @endforelse
         </ol><!-- End commentlist -->
     </div><!-- End page-content -->
-
 
     @if (Auth::check())
         @if ($errors->any())

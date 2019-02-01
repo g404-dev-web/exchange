@@ -9,4 +9,9 @@ class UserRepository extends Repository
     {
         parent::__construct($model);
     }
+
+    public function getAllUsers()
+    {
+        return $this->model->all();
+    }
 }
