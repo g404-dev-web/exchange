@@ -1,9 +1,22 @@
 <article class="question single-question question-type-normal">
+    
+    
     {!!   $routeIsQuestionShow ? '':'<a href="'.url('/questions/'.$question->id).'">' !!}
         <h2>
+            
             <span class="color">{{ $question->title }}</span>
+            @if(Auth::check() && Auth::user()->is_admin == 1)
+            <form method="POST" action=" {{route('deleteQuestion')}} ">
+                {{ csrf_field() }}
+                <input type="hidden" value="{{$question->id}}" name="questionId">
+                <button type="submit" class="button question-report delete-button ">Supprimer</button>
+            </form>
+            @endif
         </h2>
+        
     {!!  $routeIsQuestionShow ? '':'</a>' !!}
+    
+
     <div class="question-author-date">
         <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
     </div>

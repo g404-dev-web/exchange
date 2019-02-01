@@ -44,7 +44,7 @@
         <script src="{{ asset('/js/jquery.flexslider.js') }}"></script>
         <script src="{{ asset('/js/jquery.prettyPhoto.js') }}"></script>
         <script src="{{ asset('/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
-        <script src="{{ asset('/js/jquery.scrollTo.js') }}"></script >
+        <script src="{{ asset('/js/jquery.scrollTo.js') }}"></script>
         <script src="{{ asset('/js/jquery.nav.js') }}"></script>
         <script src="{{ asset('/js/tags.js') }}"></script>
         <script src="{{ asset('/js/jquery.bxslider.min.js') }}"></script>

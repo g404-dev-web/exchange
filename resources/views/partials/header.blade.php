@@ -45,7 +45,7 @@
                     </li>
 
                     @if($currentUser->is_admin)
-                        <li><a href="{{ route('admin.users') }}">Users</a></li>
+                        <li><a href="{{ route('admin.users') }}">Admin</a></li>
                     @endif
                     <li><a href="{{ url('/logout') }}">Déconnexion</a></li>
                 @endif

@@ -879,7 +879,7 @@ div[class*="slider_shadow"]:before, div[class^="header_shadow"] {
 	overflow: hidden;
 	font-size: 22px;
 	font-weight: bold;
-	padding-right: 161px;
+	display: flex;
 }
 .question h2 a {
 	color: #2f3239;
@@ -5285,4 +5285,8 @@ li.select-answer input{
 .comment-text .text li {
 	list-style: square;
 	margin-left: 20px;
+}
+
+.delete-button {
+	background-color: #2f3239;
 }

@@ -9,6 +9,7 @@ use App\Repositories\AnswerRepository;
 use App\Repositories\QuestionRepository;
 use Auth;
 use Parsedown;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -136,6 +137,14 @@ class QuestionController extends Controller
         return view('question.show', compact(
             'question', 'answers', 'nbrAnswers', 'nextQuestionId', 'previousQuestionId', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'hasSelectedAnswer', 'relatedQuestions'
         ));
+    }
+
+    public function search(Request $request)
+    {
+        $data = $request->input('search');
+        var_dump($data);
+        $response = Question::search($data)->get();
+        dd($response);
     }
 
 }

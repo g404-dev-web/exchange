@@ -14,7 +14,6 @@ class HomeController extends Controller
 {
     protected $questionRepository;
 
-
     public function __construct(QuestionRepository $questionRepository)
     {
         parent::__construct();
@@ -28,12 +27,11 @@ class HomeController extends Controller
     {
         $questions = $this->questionRepository->getOrdered();
         $recentQuestions = $this->questionRepository->getRecent(2);
-
+        $user = Auth::user();
         $userQuestionPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('question_id')->all() : [];
         $userAnswerPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('answer_id')->all() : [];
 
-
-        return view('homepage', compact('questions', 'recentQuestions', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes'));
+        return view('homepage', compact('questions', 'recentQuestions', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'user'));
     }
 
     private function generatePoints()
