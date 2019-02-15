@@ -21,7 +21,10 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
+<<<<<<< HEAD
             $table->integer('fabric_id')->unsigned();
+=======
+>>>>>>> b16c68721079d99e9f9677b0adb9f0b769eaf958
         });
     }
 
