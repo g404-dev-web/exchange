@@ -57,4 +57,8 @@ class Question extends Model
     {
         return 'questions_index';
     }
+
+    public function notification() {
+        return $this->hasMany(App\Notification::class);
+    }
 }

@@ -22,9 +22,8 @@ class QuestionController extends Controller
 
         $this->questionRepository = $questionRepository;
         $this->answerRepository = $answerRepository;
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -38,12 +37,8 @@ class QuestionController extends Controller
         $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
 
         $recentQuestions = $this->questionRepository->getRecent(2);
-//        $nbrAnswers = $answerRepository->getNbrAnswers($id);
-
-        //$questions = $this->questionRepository->getOrderedQuestions()->paginate(25);
         return view('question.index', compact('questions', 'recentQuestions', 'userQuestionPreviousVotes'));
     }
-
 
     /**
      * Display a listing of user questions
@@ -55,11 +50,8 @@ class QuestionController extends Controller
         $questions = $this->questionRepository->getUserQuestions($this->currentUser->id);
         $questionsCount = $this->questionRepository->countUserQuestions($this->currentUser->id);
         $answersCount = $this->answerRepository->getUserAnswersCount($this->currentUser->id);
-
         $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
-
         $recentQuestions = $this->questionRepository->getRecent(2);
-
 
         return view('question.user', compact('questions', 'recentQuestions', 'userQuestionPreviousVotes', 'questionsCount', 'answersCount'));
     }
@@ -74,27 +66,7 @@ class QuestionController extends Controller
         $question = false;
         return view('question.create', compact('question'));
     }
-    public function lock($id)
-    {
-        if(Auth::user()->is_admin == 1){
-        $question = $this->questionRepository->show($id);
-        $question->is_locked = 1;
-        $question->save();
-        }
-        return redirect()->back();
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Request $request)
-    {
-        $questionId = $request['questionId'];
-        $question = $this->questionRepository->show($questionId);
-        return view('question.create', compact('question'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -114,18 +86,6 @@ class QuestionController extends Controller
         return redirect()
             ->route('questions.show', ['id' => $question->id])
             ->with('flash_message', 'Question added !');
-    }
-    public function update(Request $request)
-    {
-        $question = $this->questionRepository->show($request['questionId']);
-        $question->title = $request['title'];
-        $question->description = $request['description'];
-        $question->category = $request['category'];
-        $question->save();
-
-        return redirect()
-            ->route('questions.show', ['id' => $question->id])
-            ->with('flash_message', 'Question updated !');
     }
 
     /**
@@ -172,17 +132,5 @@ class QuestionController extends Controller
             'question', 'answers', 'nbrAnswers', 'nextQuestionId', 'previousQuestionId', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'hasSelectedAnswer', 'relatedQuestions'
         ));
     }
-
-    public function search(Request $request)
-    {
-        $data = $request->input('search');
-        $questions = Question::search($data)->get();
-
-        $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
-        $userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : [];
-        
-        return view('question.search', compact('questions', 'userQuestionPreviousVotes', 'userAnswerPreviousVotes'));
-    }
-
 }
 

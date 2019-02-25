@@ -180,6 +180,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Benwilkins\FCM\FcmNotificationServiceProvider::class,
+        // LaravelFCM\FCMServiceProvider::class,
     ],
 
     /*
@@ -231,6 +233,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
+
+	    // 'FCM'      => LaravelFCM\Facades\FCM::class,
     ],
 
 ];

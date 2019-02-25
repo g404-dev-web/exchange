@@ -5304,3 +5304,20 @@ li.select-answer input{
 	background-color: #ff7361;
 	margin-left: 10px;
 }
+
+.current{
+	background-color: #ff7361 !important;
+}
+
+.button-cat{
+	background-color: lightgray ;
+}
+
+.button-cat:hover{
+	background-color: #2f3239 !important;
+
+}
+.karma{
+	font-size: 80%;
+	font-weight: initial;
+}

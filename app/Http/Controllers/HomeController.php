@@ -29,29 +29,35 @@ class HomeController extends Controller
     public function index()
     {
         $fabricId = 0;
-        $questions = $this->questionRepository->getOrdered();
         $recentQuestions = $this->questionRepository->getRecent(2);
         $user = Auth::user();
         $userQuestionPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('question_id')->all() : [];
         $userAnswerPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('answer_id')->all() : [];
         $fabrics = DB::table('fabrics')->get();
 
+        $id = request("filter");
+        $search = request("search");
+        $category = request("category");
+        $params = [];
+
+        if($id) {
+            $params["fabric_id"] = $id;
+        }
+        
+        if($search) {
+            $params["search"] = $search;
+        }
+
+        if($category) {
+            $params["category"] = $category;
+        }
+
+        $questions = $this->questionRepository->advancedSearch($params);
+        // dd($questions);
+
         return view('homepage', compact('questions', 'recentQuestions', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'user', 'fabrics', 'fabricId'));
     }
 
-    public function filterByFrabric($fabricId)
-    {
-        $fabricId = $fabricId;
-        $recentQuestions = $this->questionRepository->getRecent(2);
-        $questions = $this->questionRepository->getOrdered();
-        $user = Auth::user();
-        $userQuestionPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('question_id')->all() : [];
-        $userAnswerPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('answer_id')->all() : [];
-        $fabrics = DB::table('fabrics')->get();
-
-        return view('homepage', compact('questions', 'recentQuestions', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'user', 'fabrics', 'fabricId'));
-
-    }
 
     public function profil(){
         $user = Auth::user();

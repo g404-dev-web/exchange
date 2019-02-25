@@ -6,12 +6,12 @@ Un clone très léger de stackoverflow destiné aux débutants.
 
 PHP7 / Laravel / SQL
 
-## Installation
+## Pour contribuer :
 
 - `git clone https://gitlab.com/simplon-roanne/exchange`
 - `cd exchange`
 - `composer install`
--  Copier .env.example vers .env et remplir les informations DB
+-  Copier .env.example vers .env et remplir les informations de votre base de donnée DB
 - `php artisan migrate`
 - `php artisan db:seed`
 

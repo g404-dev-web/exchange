@@ -16,11 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 255);
-<<<<<<< HEAD
             $table->string('description', 5000);
-=======
-            $table->string('description', 655);
->>>>>>> b16c68721079d99e9f9677b0adb9f0b769eaf958
             $table->string('category', 255);
             $table->timestamps();
             $table->integer('user_id')->unsigned();

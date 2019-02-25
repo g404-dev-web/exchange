@@ -23,7 +23,7 @@
 
 <style>
 	code {
-            background: #eee;
+        background: #eee;
 	    padding: 2px 5px;
 	}
 

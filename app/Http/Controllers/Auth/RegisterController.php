@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Repositories\NotificationsRepository;
 
 class RegisterController extends Controller
 {
@@ -30,15 +31,19 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/';
 
+    /** @var NotificationsRepository */
+    protected $notificationsRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(NotificationsRepository $notificationsRepository)
     {
-	parent::__construct();
+	    parent::__construct();
         $this->middleware('guest');
+        $this->notificationsRepository = $notificationsRepository;
     }
 
     /**
@@ -54,6 +59,7 @@ class RegisterController extends Controller
             'fabric_id' => 'required|integer',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'token_firebase' => 'string',
         ]);
     }
 
@@ -65,11 +71,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        dd($data);
+        $user = User::create([
             'name' => $data['name'],
             'fabric_id' => $data['fabric_id'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        
+        if (isset($data['token_firebase'])) {
+            $this->notificationsRepository->subscribe($data["token_firebase"], $user->id, 'all');
+        }
+
+        return $user;
     }
 }

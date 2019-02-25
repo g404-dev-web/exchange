@@ -32,7 +32,7 @@
                 <li class="comment" id="comment-{{$answer->id}}">
                     <div class="comment-body comment-body-answered clearfix">
                        
-                        @if(Auth::check() && Auth::user()->is_admin == 1)
+                        @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
                         <form method="POST" action=" {{route('deleteAnswer')}} ">
                             {{ csrf_field() }}
                             <input type="hidden" value="{{$answer->id}}" name="answerId">
@@ -43,7 +43,8 @@
                         <div class="comment-text">
                             <div class="author clearfix">
                                 <div class="comment-author">
-                                    <span class="color">{{ $answer->user->name }}</span>
+                                    <span class="color">{{ $answer->user->name }} </span>
+                                    <span class="karma">Karma : {{ $answer->user->points }}</span>
                                 </div>
                                 <div class="comment-vote">
 
@@ -106,9 +107,9 @@
         </ol><!-- End commentlist -->
     </div><!-- End page-content -->
 
-    @if (Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
+    @if (Auth::check() && Auth::user()->is_admin == 1 )
         <div id="lock-button" class="page-content clearfix">
-            {!! Form::open(['action' => 'QuestionController@lock', 'method' => 'post']) !!}
+            {!! Form::open(['action' => 'AdminController@lockQuestion', 'method' => 'post']) !!}
             {!! Form::hidden('question_id', $question->id) !!}
             {!! Form::submit('Fermer cette question', ['id' => 'submit', 'class' => 'button color small']) !!}
         </div>

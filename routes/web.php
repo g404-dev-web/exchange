@@ -1,5 +1,7 @@
 <?php
 
+use App\Notifications\SomeNotifications;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,9 +14,12 @@
 */
 
 Auth::routes();
+Route::post("/notifications/all", "NotificationsController@subscribeAll");
+Route::post("/notifications/question/{id}", "NotificationsController@subscribeQuestion");
+Route::get("/notifications/test", "NotificationsController@send");
 
 Route::get('/', 'HomeController@index');
-Route::get('/filter/{id}', 'HomeController@filterByFrabric');
+//Route::get('/filter/{id}', 'HomeController@index');
 
 Route::get('questions/user', 'QuestionController@user')->name('questions.user');
 Route::get('profil/user', 'HomeController@profil')->name('profil.user');
@@ -22,9 +27,9 @@ Route::post('profil/edit', 'HomeController@editProfil')->name('profil.editProfil
 
 
 Route::resource('questions', 'QuestionController')->only([
-    'index', 'create', 'store', 'show', 'update', 'edit'
+    'index', 'create', 'store', 'show'
 ]);
-Route::post('search', 'QuestionController@search');
+Route::get('search', 'QuestionController@search');
 
 Route::resource('answers', 'AnswerController')->only([
     'store'
@@ -43,6 +48,6 @@ Route::get('/admin/users/{id}/delete',  'AdminController@userDelete')->name('adm
 
 Route::post('/delete_question', 'AdminController@deleteQuestion')->name('deleteQuestion');
 Route::post('/delete_answer', 'AdminController@deleteAnswer')->name('deleteAnswer');
-Route::post('/question/edit', 'QuestionController@edit')->name('questionEdit');
-Route::post('/question/edit/update', 'QuestionController@update');
-Route::post('/question/lock', 'QuestionController@lock')->name('questionLock');
+Route::post('/question/edit', 'AdminController@editQuestion')->name('questionEdit');
+Route::post('/question/edit/update', 'AdminController@updateQuestion')->name('questionUpdate');
+Route::post('/question/lock', 'AdminController@lockQuestion')->name('questionLock');

@@ -18,7 +18,7 @@
         {{-- <input type="text" name="title" value="{{ ($question) ? $question->title : 'test'}}"> --}}
 
         <div class="form-style form-style-3" id="question-submit">
-            {!! Form::open(['action' => ($question) ? 'QuestionController@update' : 'QuestionController@store', 'method' => 'post']) !!}
+            {!! Form::open(['action' => $question ? 'AdminController@updateQuestion' : 'QuestionController@store', 'method' => 'post']) !!}
                 <div class="form-inputs clearfix">
                     <p>
                         <label class="required">Intitulé de la question<span>*</span></label>
@@ -64,7 +64,7 @@
                                 'devops' => 'Dev Ops',
                                 'other' => 'Other'
                             ],
-                        ], ($question) ? $question->category : null, ['id' => 'question-category', 'placeholder' => ($question) ? $question->category : 'Choisissez une catégorie...']) !!}
+                        ], $question ? $question->category : null, ['id' => 'question-category', 'placeholder' => ($question) ? $question->category : 'Choisissez une catégorie...']) !!}
 
                         @if ($errors->has('category'))
                             <span class="color form-description">

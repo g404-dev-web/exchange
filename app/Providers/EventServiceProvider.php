@@ -17,6 +17,11 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EventListener',
         ],
     ];
+    // protected $listen = [
+    //     'Illuminate\Notifications\Events\NotificationSent' => [
+    //         'App\Listeners\LogNotification',
+    //     ],
+    // ];
 
     /**
      * Register any events for your application.

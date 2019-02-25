@@ -3,6 +3,7 @@
     {!!   $routeIsQuestionShow ? '':'<a href="'.url('/questions/'.$question->id).'">' !!}
         <h2>
             <span class="color" style="width : 88%;">{{ $question->title }}</span>
+            {{-- {{ dd($question) }} --}}
             @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
             <form method="POST" action="{{route('questionEdit')}}">
                 {{ csrf_field() }}
@@ -22,7 +23,7 @@
     {!!  $routeIsQuestionShow ? '':'</a>' !!}
 
     <div class="question-author-date">
-        <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span> | <span>{{ $question->user->fabric->name }}</span>
+        <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span> 
     </div>
     <div class="question-inner">
         <div class="clearfix"></div>
@@ -64,7 +65,7 @@
         @endif
         <span class="label ">{{$question->user->fabric->name}}</span>
         <div class="question-tags"><i class="icon-tags"></i>
-            <a href="#!">{{ $question->category }}</a>
+            <a href="/?category={{ $question->category }}">{{ $question->category }}</a>
         </div>
         <div class="clearfix"></div>
     </div>

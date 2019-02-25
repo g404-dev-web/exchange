@@ -39,6 +39,8 @@
 
         <div class="go-up"><i class="icon-chevron-up"></i></div>
 
+        @include('partials/firebase-js')
+
         <!-- js -->
         <script src="{{ asset('/js/jquery.min.js') }}"></script>
         <script src="{{ asset('/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
