@@ -1,58 +1,83 @@
-@if(!request()->is('/'))
-    <div id="header-top">
-        <section class="container clearfix">
-            <nav class="header-top-nav">
-                <ul>
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}"><i class="icon-user"></i>Login Area</a></li>
-                    @else
-                        <li><a href="{{ url('/logout') }}">Logout</a></li>
-                    @endif
-                </ul>
-            </nav>
-            <div class="header-search">
-                <form>
-                    <input type="text" value="Search here ..." onfocus="if(this.value=='Search here ...')this.value='';" onblur="if(this.value=='')this.value='Search here ...';">
-                    <button type="submit" class="search-submit"></button>
-                </form>
-            </div>
-        </section><!-- End container -->
-    </div><!-- End header-top -->
-@endif
-<header id="header">
-    <section class="container clearfix">
-        <div class="logo">
-            <a href="{{ url('/') }}" class="font26">
-                <span>Exchange</span>.Simplon
-            </a>
-        </div>
-        <nav class="navigation">
+<div id="header-top" class="colorBackgroundSimplon">
+    <section class="container-fluid clearfix">
+        <nav class="header-top-left-nav">
             <ul>
-                <li class="{{ Request::is('/') ? 'current_page_item' : '' }}">
-                    <a href="{{ url('/') }}">Accueil</a>
-                </li>
-                <li class="{{ Request::is('questions/create') ? 'current_page_item' : '' }}">
-                        <a href="{{ route('questions.create') }}">Poser une question</a>
-                </li>
-                <li class="{{ Request::is('questions') ? 'current_page_item' : '' }}">
-                    <a href="{{ route('questions.index') }}">Donner une réponse</a>
-                </li>
-                @if (!$currentUser)
-                    <li><a href="{{ url('/login') }}">Connexion</a></li>
+                @if($currentUser)
+                    <li>Bonjour {{ $currentUser->name }}. Tu as {{ $currentUser->points }} points de karma</li>
                 @else
-                    <li class="{{ Request::is('profil/user') ? 'current_page_item' : '' }}">
-                        <a href="{{ route('profil.user') }}">Mon profil</a>
-                    </li>
-
-                    @if($currentUser->is_admin)
-                        <li><a href="{{ route('admin.users') }}">Admin</a></li>
-                    @endif
-                    <li><a href="{{ url('/logout') }}">Déconnexion</a></li>
+                    <li>Hey Simplonnien.ne ! Rejoins-nous vite =></li>
                 @endif
             </ul>
         </nav>
-	@if($currentUser)
-        <div style="color: #fff;font-size: 10px;position: absolute;right: 5px;bottom: 0;">Bonjour {{ $currentUser->name }}. Tu as {{ $currentUser->points }} points de karma</div>
-	@endif    
-</section><!-- End container -->
+        <div class="header-top-right">
+            @if($currentUser)
+                <div class="dropdown">
+                    <button class="btn btn-small btn-profil dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mon profil
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ route('profil.user') }}">Mes informations</a>
+                        @if($currentUser->is_admin)
+                            <a class="dropdown-item" href="{{ route('admin.users') }}">Administrateur</a>
+                            <div class="dropdown-divider"></div>
+                        @endif
+                        <a class="dropdown-item" href="{{ url('/logout') }}">Déconnexion</a>
+                    </div>
+                </div>
+            @else
+                <nav class="header-top-right-nav">
+                    <ul>
+                        <li><a href="{{ url('/login') }}">Connexion</a></li>
+                        <li><a href="{{ url('/register') }}">Inscription</a></li>
+                    </ul>
+                </nav>
+            @endif
+        </div>
+    </section><!-- End container -->
+</div>
+<header id="header">
+    <!-- navbar bootstrap -->
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url('/') }}"><span class="colorTextSimplon">Exchange</span>.Help</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ url('/') }}">Accueil <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item {{ Request::is('questions/create') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('questions.create') }}">Poser une question</a>
+                    </li>
+                    <li class="nav-item {{ Request::is('questions') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('questions.index') }}">Donner une réponse</a>
+                    </li>
+                    <li class="nav-item last {{ Request::is('faq') ? 'active' : '' }}">
+                        <a class="nav-link" href="#">Foire aux questions</a>
+                    </li>
+                    <div class="mobile-nav">
+                        @if($currentUser)
+                            <div class="dropdown-divider"></div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('profil.user') }}">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users') }}">Administrateur</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/logout') }}">Déconnexion</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/login') }}">Connexion</a>
+                            </li>
+                        @endif
+                    </div>
+                </ul>
+            </div> 
+        </div>
+    </nav>
 </header><!-- End header -->

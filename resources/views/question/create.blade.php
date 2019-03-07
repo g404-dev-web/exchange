@@ -9,111 +9,99 @@
 
 @section('content')
 
-    <div class="page-content ask-question">
-        <div class="boxedtitle page-title"><h2>Posez votre question</h2></div>
-
-        <p>La précision et la rapidité de la réponse passe par une question correctement posée. Votre titre doit être explicite, votre question pas globale mais spécifique.</p>
-        <p>Si vous faites face à un bug, copier le code nécessaire à la résolution.</p>
-
-        {{-- <input type="text" name="title" value="{{ ($question) ? $question->title : 'test'}}"> --}}
-
-        <div class="form-style form-style-3" id="question-submit">
+    <div class="card create-question mx-4">
+        <div class="card-body">
+            <h4 class="card-title colorTextSimplon">Posez votre question</h4>
+            <hr>
+            <p class="card-text my-4">La précision et la rapidité de la réponse passe par une question correctement posée. Votre titre doit être explicite, votre question pas globale mais spécifique.</p>
+            <p class="card-text my-4">Si vous faites face à un bug, copier le code nécessaire à la résolution.</p>      
+        
             {!! Form::open(['action' => $question ? 'AdminController@updateQuestion' : 'QuestionController@store', 'method' => 'post']) !!}
-                <div class="form-inputs clearfix">
-                    <p>
-                        <label class="required">Intitulé de la question<span>*</span></label>
-
-                        {!! Form::text('title',
-                                       ($question) ? $question->title : null
-                                      ) !!}
-                        @if ($errors->has('title'))
-                            <span class="color form-description">
-                                <strong>{{ $errors->first('title') }}</strong>
-                            </span>
-                        @else
-                            <span class="form-description">Choisir un titre approprié et explicite est la première étape</span>
-                        @endif
-                    </p>
-                    {{--<p>--}}
-                        {{--<label>Tags</label>--}}
-                        {{--<input type="text" class="input" name="question_tags" id="question_tags" data-seperator=",">--}}
-                        {{--<span class="form-description">Please choose suitable Keywords .</span>--}}
-                    {{--</p>--}}
-                    <p>
-                        <label class="required">Categorie<span>*</span></label>
-                        {!! Form::select('category',[
-                            'Back-end' => [
-                                'php' => 'PHP',
-                                'mysql' => 'MySQL',
-                                'nodejs' => 'NodeJS',
-                                'c#' => 'C#',
-                                'python' => 'Python',
-                                'ruby' => 'Ruby',
-                                'other' => 'Other'
-                            ],
-                            'Front-end' => [
-                                'html' => 'HTML',
-                                'css' => 'CSS',
-                                'sass' => 'SASS',
-                                'js' => 'JS',
-                                'other' => 'Other'
-                            ],
-                            'miscellaneous' => [
-                                'agile' => 'Agile',
-                                'sysadmin' => 'Admin',
-                                'devops' => 'Dev Ops',
-                                'other' => 'Other'
-                            ],
-                        ], $question ? $question->category : null, ['id' => 'question-category', 'placeholder' => ($question) ? $question->category : 'Choisissez une catégorie...']) !!}
-
-                        @if ($errors->has('category'))
-                            <span class="color form-description">
-                                <strong>{{ $errors->first('category') }}</strong>
-                            </span>
-                        @else
-                            <span class="form-description">Choisir de manière pertinente la catégorie, ne pas tout ranger dans other !</span>
-                        @endif
-
-                        @if ($question)
-                            {!! Form::hidden('questionId', $question->id ) !!}
-                        @endif
-                    </p>
-
-                    {{--<label>Attachment</label>--}}
-                    {{--<div class="fileinputs">--}}
-                        {{--<input type="file" class="file">--}}
-                        {{--<div class="fakefile">--}}
-                            {{--<button type="button" class="button small margin_0">Select file</button>--}}
-                            {{--<span><i class="icon-arrow-up"></i>Browse</span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
+            
+            <div class="form-group my-4">
+                {{-- <label class="required">Intitulé de la question<span class="colorTextSimplon"> *</span></label> --}}
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text required" for="inputGroupSelect01">Intitulé de la question<span class="colorTextSimplon pl-2">*</span></label>
+                    </div>
+                    {!! Form::text('title', ($question) ? $question->title : null, ['class' => 'form-control', 'id' => 'inputGroupSelect01'] ) !!}
                 </div>
-                <div id="form-textarea">
-                    <p>
-                        <label class="required">Details<span>*</span></label>
-                        {{--<textarea id="question-details" name="description" aria-required="true" cols="58" rows="8"></textarea>--}}
-                        {!! Form::textarea('description', ($question) ? $question->description : null, [
-                            'id'      => 'question-details',
-                            'cols'    => 58,
-                            'rows'    => 8
-                        ]) !!}
-                        @if ($errors->has('description'))
-                            <span class="color form-description">
-                                <strong>{{ $errors->first('description') }}</strong>
-                            </span>
-                        @else
-                            <span class="form-description">Ecrire la description de votre problème en entrant tous les détails possibles qui en permettront la résolutio</span>
-                        @endif
-                    </p>
+                
+                @if ($errors->has('title'))
+                    <span class="color form-description">
+                        <strong>{{ $errors->first('title') }}</strong>
+                    </span>
+                @else
+                    <div class="small text-center text-muted ">Choisir un titre approprié et explicite est la première étape</div>
+                @endif
+            </div>
+            <div class="form-group my-5">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text required" for="inputGroupSelect02">Catégories<span class="colorTextSimplon pl-2">*</span></label>
+                    </div>
+                    {!! Form::select('category',[
+                                'Back-end' => [
+                                    'php' => 'PHP',
+                                    'mysql' => 'MySQL',
+                                    'nodejs' => 'NodeJS',
+                                    'c#' => 'C#',
+                                    'python' => 'Python',
+                                    'ruby' => 'Ruby',
+                                    'other' => 'Other'
+                                ],
+                                'Front-end' => [
+                                    'html' => 'HTML',
+                                    'css' => 'CSS',
+                                    'sass' => 'SASS',
+                                    'js' => 'JS',
+                                    'other' => 'Other'
+                                ],
+                                'miscellaneous' => [
+                                    'agile' => 'Agile',
+                                    'sysadmin' => 'Admin',
+                                    'devops' => 'Dev Ops',
+                                    'other' => 'Other'
+                                ],
+                            ], $question ? $question->category : null, ['id' => 'inputGroupSelect02', 'class' => 'custom-select', 'placeholder' => ($question) ? $question->category : 'Choisissez une catégorie...']) !!}             
                 </div>
-                <p class="form-submit">
-                    {!! Form::submit('Publiez votre question!', ['id' => 'publish-question', 'class' => 'button color small submit']) !!}
-                    {{--<input type="submit" id="publish-question" value="Publish Your Question" class="button color small submit">--}}
+                @if ($errors->has('category'))
+                    <div class="color form-description">
+                        <strong>{{ $errors->first('category') }}</strong>
+                    </div>
+                @else
+                    <div class="small text-center text-muted">Choisir de manière pertinente la catégorie, ne pas tout ranger dans other !</div>
+                @endif
+
+                @if ($question)
+                    {!! Form::hidden('questionId', $question->id ) !!}
+                @endif
+            </div>
+        
+            
+            <div id="form-group">
+                <p>
+                    <label class="required">Details<span class="colorTextSimplon"> *</span></label>
+                    {{--<textarea id="question-details" name="description" aria-required="true" cols="58" rows="8"></textarea>--}}
+                    {!! Form::textarea('description', ($question) ? $question->description : null, [
+                        'id'      => 'question-details',
+                        'cols'    => 58,
+                        'rows'    => 8
+                    ]) !!}
+                    @if ($errors->has('description'))
+                        <span class="color form-description">
+                            <strong>{{ $errors->first('description') }}</strong>
+                        </span>
+                    @else
+                        <div class="small text-center text-muted">Ecrire la description de votre problème en entrant tous les détails possibles qui en permettront la résolution.</div>
+                    @endif
                 </p>
+            </div>
+            {!! Form::submit('Publiez votre question!', ['class' => 'my-3 btn btn-custom colorBackgroundSimplon col-12']) !!}
+
             {!! Form::close() !!}
         </div>
-    </div><!-- End page-content -->
+    </div>
 
 @endsection
 

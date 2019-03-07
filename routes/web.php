@@ -29,7 +29,6 @@ Route::post('profil/edit', 'HomeController@editProfil')->name('profil.editProfil
 Route::resource('questions', 'QuestionController')->only([
     'index', 'create', 'store', 'show'
 ]);
-Route::get('search', 'QuestionController@search');
 
 Route::resource('answers', 'AnswerController')->only([
     'store'

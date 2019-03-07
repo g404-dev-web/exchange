@@ -2,13 +2,12 @@
 
 namespace App;
 
-// use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Rackbeat\UIAvatars\HasAvatar;
 
 class User extends Authenticatable
 {
-    // use Notifiable;
-
+    use HasAvatar;
     /**
      * The attributes that are mass assignable.
      *
@@ -50,4 +49,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Fabric');
     }
 
+    public function getAvatar( $size = 64 ) {
+        return $this->getGravatar( $this->email, $size );
+    }
 }

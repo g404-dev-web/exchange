@@ -18,7 +18,7 @@ class CreateNotificationSubscribersTable extends Migration
             $table->string('token_firebase', 655);
             $table->integer('user_id')->unsigned();
             $table->enum('type', ['all','question']);
-            $table->integer('question_id')->unsigned()->nullable();;
+            $table->integer('question_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

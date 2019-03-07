@@ -8,6 +8,7 @@ use App\Repositories\AnswerRepository;
 use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -30,7 +31,9 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = $this->userRepository->all();
+        $fabric_id_admin = Auth::user()->fabric_id;
+        $users = $this->userRepository->all()->where('fabric_id', $fabric_id_admin);
+
         return view('admin/users', compact('users'));
     }
 
@@ -61,7 +64,7 @@ class AdminController extends Controller
 
     public function lockQuestion(Request $request)
     {
-        $id = $request['questionId'];
+        $id = $request['question_id'];
         $question = $this->questionRepository->show($id);
         $question->is_locked = 1;
         $question->save();

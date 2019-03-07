@@ -1,72 +1,63 @@
-<article class="question single-question question-type-normal">
-    
-    {!!   $routeIsQuestionShow ? '':'<a href="'.url('/questions/'.$question->id).'">' !!}
-        <h2>
-            <span class="color" style="width : 88%;">{{ $question->title }}</span>
-            {{-- {{ dd($question) }} --}}
-            @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
-            <form method="POST" action="{{route('questionEdit')}}">
+<div class="card mt-3 shadow-sm">
+    <div class="card-body">
+        <a class="card-link title-card colorTextSimplon" href="{{ url('/questions/'.$question->id) }}">{{ $question->title }}</a>
+        @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
+            <form method="POST" action="{{route('questionEdit')}}" class="btn-editer ml-2">
                 {{ csrf_field() }}
                 <input type="hidden" value="{{$question->id}}" name="questionId">
-                <button type="submit" class="button question-report delete-button ">Editer</button>
+                <button class="btn" type="submit" class="button question-report delete-button ">Editer</button>
             </form>
             @endif
+                {{ var_dump($question->id) }}
+                {{ var_dump($question->user_id) }}
 
             @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
-            <form method="POST" action="{{route('questionLock')}}">
+            <form method="POST" action="{{route('questionLock')}}" class="btn-suppr">
                 {{ csrf_field() }}
                 <input type="hidden" value="{{$question->id}}" name="questionId">
-                <button type="submit" onclick="return confirm('Confirmer la fermeture ?')" class="button question-report delete-button ">Supprimer</button>
+                <button class="btn" type="submit" onclick="return confirm('Confirmer la fermeture ?')" class="button question-report delete-button ">Supprimer</button>
             </form>
+        @endif
+        <div class="card-subtitle mb-2 mt-2 text-muted clearfix">
+            <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
+        </div>
+
+        <div class="d-inline-flex flex-column align-middle">
+            @if(in_array($question->id, $userQuestionPreviousVotes))
+                <li class="list-unstyled mb-1">
+                    <input type="submit" value="▲"
+                        class=""
+                        title='Vous avez déjà upvoté cette question'>
+                </li>
+            @else
+                <li class="list-unstyled mb-1">
+                    {!! Form::open(['action' => 'UpvoteController@store', 'method' => 'post']) !!}
+                    {!! Form::hidden('question_id', $question->id) !!}
+                    {!! Form::submit('▲', ['class' => 'question-vote-up']) !!}
+                    {!! Form::close() !!}
+                </li>
             @endif
-        </h2>
-    {!!  $routeIsQuestionShow ? '':'</a>' !!}
 
-    <div class="question-author-date">
-        <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span> 
-    </div>
-    <div class="question-inner">
-        <div class="clearfix"></div>
-        <div class="comment-vote">
-            <ul class="question-vote">
-
-                @if(in_array($question->id, $userQuestionPreviousVotes))
-                    <li>
-                        <input type="submit" value="▲"
-                               class="question-vote-up tooltip-n"
-                               title='Vous avez déjà upvoté cette question'>
-                    </li>
-                @else
-                    <li>
-                        {!! Form::open(['action' => 'UpvoteController@store', 'method' => 'post']) !!}
-                        {!! Form::hidden('question_id', $question->id) !!}
-                        {!! Form::submit('▲', ['class' => 'question-vote-up']) !!}
-                        {!! Form::close() !!}
-                    </li>
-                @endif
-                <!--<li><a href="#" class="question-vote-down" title="Dislike"></a></li>!-->
-            </ul>
-
-            <div class="question-vote-result">
+            <div class="text-center nbVotes">
                 {{count($question->upvotes)}}
             </div>
         </div>
-        <div class="question-desc">
+        <div class="card-text d-inline-block col-11 align-middle mt-2">
             {!! strip_tags($question->description, '<a><b><blockquote><code><del><dd><dl><dt><em><h1><h2><h3><i><kbd><li><ol><p><pre><s><sup><sub><strong><strike><ul><br><hr>') !!}
         </div>
-        <!--<div class="question-details">
-            <span class="question-answered question-answered-done"><i class="icon-ok"></i>Résolu</span>
+        <hr>
+        <div class="clearfix link-card">
+                <a href="/questions/{{$question->id}}" class="card-link "><i class="fas fa-comment"></i> {{ count($question->answers) }} Réponse(s)</a>
+                <span class="ml-3"><i class="far fa-eye"></i> {{ $question->views }} vues </span>
+                @if($question->hasSelectedAnswer)
+                    <span class="ml-3"><i class="fas fa-check"></i> Solution trouvée</span>
+                @endif
+                <span class="ml-3 colorBackgroundSimplon fabric-span">{{ $question->user->fabric->name }}</span>
+
+                <a href="/?category={{ $question->category }}" class="float-right card-link ml-3"><i class="fas fa-tags"></i> {{ $question->category }}</a>
+                <div class="clearfix"></div>
         </div>
-        -->
-        <span class="question-comment"><a href="/questions/{{$question->id}}#commentlist"><i class="icon-comment"></i>{{ count($question->answers) }} Réponse(s)</a></span>
-        <span class="question-view">👁 {{ $question->views }} vues  </span>
-        @if($question->hasSelectedAnswer)
-            <span class="question-answered">✔️ Solution trouvée</span>
-        @endif
-        <span class="label ">{{$question->user->fabric->name}}</span>
-        <div class="question-tags"><i class="icon-tags"></i>
-            <a href="/?category={{ $question->category }}">{{ $question->category }}</a>
-        </div>
-        <div class="clearfix"></div>
     </div>
-</article>
+</div>
+
+

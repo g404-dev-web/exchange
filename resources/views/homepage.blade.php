@@ -9,38 +9,34 @@
 
 @section('styles')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css"> --}}
 
 @endsection
 
 @section('content')
 
-    <div class="tabs-warp question-tab">
-        
-        {{-- <ul class="tabs">
-            <li class="tab"><a href="#" class="current">Recent Questions</a></li>
-            <li class="tab"><a href="#">Most Responses</a></li>
-            <li class="tab"><a href="#">Recently Answered</a></li>
-            <li class="tab"><a href="#">No answers</a></li>
-        </ul> --}}             
-        
-        <div class="tabs">
-            <a class="button button-cat  small {{request('filter') == 0 ? 'current' : ''}}" href="/">Toutes les fabriques</a>
+        <ul class="nav nav-tabs mb-4">
+            <li class="nav-item">
+                <a class="nav-link {{request('filter') == 0 ? 'active' : ''}}"" href="/">SimplonS</a>
+            </li>
             @foreach ($fabrics as $fabric)
-                <a class="button button-cat  small {{request('filter') == $fabric->id ? 'current' : ''}}" href="/?filter={{ $fabric->id }}">{{ $fabric->name }}</a>
+                <li class="nav-item">
+                    <a class="nav-link {{request('filter') == $fabric->id ? 'active' : ''}}" href="/?filter={{ $fabric->id }}">{{ $fabric->name }}</a>
+                </li>
             @endforeach
-        </div>
+        </ul>           
+        
         <div class="tab-inner-warp">
             <div class="tab-inner">
-                    @forelse($questions as $question)
-                        @include("partials/question")
-                    @empty
-                        <p>Pas encore de questions</p>
-                    @endforelse
+                @forelse($questions as $question)
+                    @include("partials/question")
+                @empty
+                    <p>Pas encore de questions</p>
+                @endforelse
                 {{--<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>--}}
             </div>
         </div>
-    </div><!-- End page-content -->
+    
 
 @endsection
 
@@ -55,9 +51,9 @@
 
 @section('scripts')
 
-<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 
-<script>hljs.initHighlightingOnLoad();</script>
+<script>hljs.initHighlightingOnLoad();</script> --}}
 
 @endsection
 

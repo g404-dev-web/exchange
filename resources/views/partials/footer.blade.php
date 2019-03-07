@@ -1,16 +1,16 @@
 <footer id="footer">
-    <section class="container">
+    <section class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 borderColorSimplonLeft">
                 <div class="widget widget_contact">
-                    <h3 class="widget_title">Exchange ?</h3>
+                    <h3 class="widget_title colorTextSimplon">Exchange ?</h3>
                     <p>Un lieu d'échange convivial où toutes questions trouvera une réponse</p>
                     <p>Apprentissage de la pédagogie de l'entraide. Savoir questionner pour obtenir des réponses pertinentes</p>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4 borderColorSimplonLeftAndRight text-center">
                 <div class="widget">
-                    <h3 class="widget_title">Liens utiles</h3>
+                    <h3 class="widget_title colorTextSimplon">Liens utiles</h3>
                     <ul>
                         <li class="{{ Request::is('/') ? 'current_page_item' : '' }}">
                             <a href="{{ url('/') }}">Accueil</a>
@@ -33,9 +33,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4 borderColorSimplonRight text-right">
                     <div class="widget widget_contact">
-                        <h3 class="widget_title">Intéret ?</h3>
+                        <h3 class="widget_title colorTextSimplon">Intéret ?</h3>
                         <p>Créer en tant que projet back office pour la fabrique de Roanne, cette outil à vocation pédagogique a pour objectif de servir de lieu d'échange entre tous simploniens de toutes promotions.</p>
                     </div>
                 </div>
@@ -44,14 +44,12 @@
     </section><!-- End container -->
 </footer><!-- End footer -->
 <footer id="footer-bottom">
-    <section class="container">
-        <div class="copyrights f_left">Copyright 2018 Une Question ? | <a href="mailto:contact@idmkr.io">By Simplon-Roanne</a></div>
+    <section class="container-fluid">
+        <div class="copyrights f_left">Copyright 2019 Une Question ? | <a href="mailto:contact@idmkr.io">By Simplon-Roanne</a></div>
         <div class="social_icons f_right">
-            <ul>
-                <li class="twitter"><a original-title="Twitter" class="tooltip-n" href="#"><i class="social_icon-twitter font17"></i></a></li>
-                <li class="facebook"><a original-title="Facebook" class="tooltip-n" href="#"><i class="social_icon-facebook font17"></i></a></li>
-                <li class="gplus"><a original-title="Google plus" class="tooltip-n" href="#"><i class="social_icon-gplus font17"></i></a></li>
-            </ul>
+            <span class="twitter"><a original-title="Twitter" class="tooltip-n" href="#"><i class="social_icon-twitter font17"></i></a></span>
+            <span class="facebook"><a original-title="Facebook" class="tooltip-n" href="#"><i class="social_icon-facebook font17"></i></a></span>
+            <span class="gplus"><a original-title="Google plus" class="tooltip-n" href="#"><i class="social_icon-gplus font17"></i></a></span>
         </div><!-- End social_icons -->
     </section><!-- End container -->
 </footer><!-- End footer-bottom -->

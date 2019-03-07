@@ -1,14 +1,16 @@
-<div class="widget">
-    <h3 class="widget_title">Activité récente</h3>
-    <ul class="related-posts">
+<div class="card activite-recent shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title colorTextSimplon">Activité récente</h5>
         @forelse($recentQuestions as $recentQuestion)
-            <li class="related-item">
-                <h3><a href="{{ route('questions.show', ['id' => $recentQuestion->id]) }}">{{ $recentQuestion->title }}</a></h3>
-                <p>{{ str_limit(strip_tags($recentQuestion->description), 120) }}</p>
-                <div class="clear"></div><span>{{ $recentQuestion->created_at }}</span>
-            </li>
+            <hr>
+            <h6 class="card-subtitle mt-3 mb-2">
+                <a href="{{ route('questions.show', ['id' => $recentQuestion->id]) }}">{{ $recentQuestion->title }}</a>
+            </h6>
+            <p class="card-text text-muted">{{ str_limit(strip_tags($recentQuestion->description), 120) }}</p>
+            <p class="card-text"><small class="text-muted">{{ $recentQuestion->created_at }}</small></p>
+            
         @empty
-            <p>No questions at this moment</p>
+            <p>Pas de questions posés.</p>
         @endforelse
-    </ul>
+    </div>
 </div>

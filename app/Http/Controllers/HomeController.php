@@ -62,7 +62,9 @@ class HomeController extends Controller
     public function profil(){
         $user = Auth::user();
 
-        return view('profil.index', compact('user'));
+        $answers_is_selected = DB::table('answers')->where('user_id', $user->id)->where('is_selected', 1)->count();
+   
+        return view('profil.index', compact('user', 'answers_is_selected'));
     }
 
     public function editProfil(Request $request){

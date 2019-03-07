@@ -1,18 +1,15 @@
-<div class="widget widget_stats">
-    <h3 class="widget_title">Stats</h3>
-    <div class="ul_list ul_list-icon-ok">
-        <ul>
-            <li>
-                <i class="icon-question-sign"></i>Questions (
-                    <span>{{ isset($questionsCount) ? $questionsCount : \App\Question::count() }}</span>
-                )
-            </li>
-            <li>
-                <i class="icon-comment"></i>Réponses (
-                    <span>{{ isset($answersCount) ? $answersCount : \App\Answer::count() }}</span>
-                )
-            </li>
-        </ul>
+<div class="card mt-4 shadow-sm stats">
+    <div class="card-body">
+        <h5 class="card-title colorTextSimplon">Stats</h5>
+        <hr>
+        <p class="card-text text-center">
+            <i class="far fa-question-circle"></i> 
+            Questions ({{ isset($questionsCount) ? $questionsCount : \App\Question::count() }})
+        </p>
+        <p class="card-text text-center">
+            <i class="far fa-comment "></i> 
+            Réponses ({{ isset($answersCount) ? $answersCount : \App\Answer::count() }})
+        </p>
     </div>
 </div>
 

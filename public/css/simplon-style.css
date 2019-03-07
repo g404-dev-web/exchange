@@ -1,0 +1,494 @@
+@import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css);
+
+.help-block{
+    display:block;
+    width: 100%;
+    color: var(--colorSimplon);
+}
+#header-top{
+    height: 42px;
+}
+#header-top .header-top-left-nav ul{
+    margin: 0;
+    padding: 0;
+}
+#header-top .header-top-left-nav ul li{
+    float: left;
+    line-height: 42px;
+    margin-right: 15px;
+    font-size: 13px;
+    list-style: none;
+}
+#header-top .header-top-left-nav ul li a{
+    display: block;
+    float: left;
+    color: white;
+}
+#header-top .header-top-left-nav ul li a:hover{
+    color: black;
+}
+#header-top .header-top-right{
+    float: right;
+}
+#header-top .header-top-right .btn-profil{
+    color: white;
+    line-height: 42px;
+    height: 42px;
+    padding: 0;
+    margin-left: 15px;
+    font-size: 13px;
+}
+.header-top-right .dropdown-menu.show{
+    transform: translate3d(-76px, 42px, 0px)!important;
+}
+#header-top .header-top-right-nav ul{
+    margin: 0;
+    padding: 0;
+}
+#header-top .header-top-right-nav ul li{
+    float: right;
+    line-height: 42px;
+    margin-left: 15px;
+    font-size: 13px;
+    list-style: none;
+}
+#header-top .header-top-right-nav ul li a{
+    display: block;
+    float: right;
+    color: white;
+}
+#header-top .header-top-right-nav ul li a:hover{
+    color: black;
+}
+.navbar-nav .nav-item.last a{
+    padding-right: 0;
+}
+@media screen and (max-width: 768px) {
+    .header-top-left-nav li{
+        text-align:center;
+        width: 100%;
+    }
+    .header-top-right{
+        display: none!important;
+    }
+    #header .navbar{
+        padding: 15px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .mobile-nav{
+        display: none!important;
+    }
+}
+@media screen and (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+}
+
+:root {
+    --colorSimplon: #d6363e;
+    --firaCode: 'fira code'
+}
+
+body {
+	background-color: #f3f3f3;
+	color: #2f3239;
+	-webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    font-family: var(--firaCode), 'Verdana';
+}
+
+.colorTextWhite {
+    color: white;
+}
+
+.textBolder{
+    font-weight: bolder;
+}
+
+.noTextDecoration:hover {
+    text-decoration: none;
+    color:white;
+}
+
+.colorTextSimplon {
+    color: var(--colorSimplon);
+}
+
+.colorBackgroundSimplon {
+    background-color: var(--colorSimplon);
+    color: white;
+}
+
+#header {
+    position: relative; 
+}
+
+.radiusRightBtn {
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%; 
+}
+
+.navbar {
+    padding: 15px 0px;
+    background-color: #2F3239;
+}
+
+.navbar-brand {
+    font-size: 26px;
+}
+
+.searchBar p{
+    font-size: 0.9rem;
+}
+
+
+/* .addonLogin, .input-group-text{
+    border-right: 1px solid grey;
+
+} */
+
+.input-connexion {
+    border: 1px solid gray !important;
+    border-left: 0 !important;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--colorSimplon);
+    border: 1px solid var(--colorSimplon);
+}
+
+/* .custom-checkbox .custom-control-input:checked ~ .custom-control-label:focus {
+    background-color: var(--colorSimplon);
+} */
+
+.addonsPretendLogin span {
+    cursor: pointer;
+    font-size: 13px;
+    color: black;
+    transition: all 0.4s;
+}
+
+body > section {
+    min-height: 65vh;
+}
+
+.addonsPretendLogin span:hover {
+    color: white;
+    background-color: var(--colorSimplon);
+}
+
+.label {
+    background-color: black;
+    color: white;
+    border: white;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+textarea:focus,
+.input-group > .custom-select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+input[type="checkbox"]:focus,
+.uneditable-input:focus,
+.custom-control-input:focus ~ .custom-control-label::before {   
+  border-color: grey;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(124, 128, 123, 0.6);
+  outline: 0 none;
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    border-color: gray;
+}
+
+.btn-custom {
+    border: white solid 1px;
+    transition: all 0.4s;
+}
+
+.btn-custom:hover, .btn-custom:active {
+    background-color: black;
+    color: white;
+}
+
+#search .form-control {
+    border: white;
+}
+
+.nav-tabs {
+    font-size: 0.9rem;
+    border-bottom-color: var(--colorSimplon);
+}
+
+.nav-tabs a {
+    color: black;
+}
+
+.nav-link {
+    padding: 10px 10px;
+}
+
+.nav-link.active {
+    color: var(--colorSimplon) !important;
+    border-color: var(--colorSimplon) var(--colorSimplon) white !important;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: white;
+    border: var(--colorSimplon);
+}
+
+.title-card {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.title-card:hover {
+    color: var(--colorSimplon);
+}
+
+.btn-editer, .btn-suppr {
+    float: right;
+    background-color: black;
+    border-radius: 5%;
+}
+
+.btn-editer .btn, .btn-suppr .btn, button.btn-admin{
+    color: white;
+    font-size: 0.8rem;
+}
+
+.btn-editer:hover, .btn-suppr:hover, .btn-admin:hover, .btn-question:hover {
+    background-color: var(--colorSimplon);
+    color: white;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+}
+
+.list-unstyled input[value="▲"] {
+    /* background: lightgray; */
+	color: inherit;
+	border: none;
+	padding: 0 15px;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    font-size: 1.6rem;
+    border-radius: 3px;
+}
+
+.nbVotes {
+    background-color: #f3f3f3;
+}
+
+.card-text {
+    font-size: 0.9rem;
+}
+
+.list-unstyled .upvote:hover {
+    background: white;
+	color: var(--colorSimplon);
+}
+
+.link-card, .link-card .card-link {
+    font-size: 0.8rem;
+    color: black;
+}
+
+.card-link:hover {
+    color: var(--colorSimplon);
+}
+
+.fabric-span {
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+/*----------------acitivié recente / stats--------------------*/
+
+.activite-recent h6 a {
+   color: black;
+}
+
+.stats .card-text {
+    border: 2px solid grey;
+    padding: 8px;
+}
+
+/*-------------------------Show question-------------------------*/
+
+.next {
+    float: right;
+}
+
+.prev {
+    float: left;
+}
+
+.btn-admin {
+    background-color: black;
+    border-radius: 5%;
+    float: right;
+}
+
+input.fa-check {
+    color: black;
+    border: none;
+	padding: 3px 12px;
+    font-size: 1.2rem;
+    border-radius: 3px;
+}
+
+input.fa-check:hover {
+    color: var(--colorSimplon);
+    background-color: transparent;
+}
+
+li span .fa-check{
+    padding: 3px 12px;
+    font-size: 1.2rem;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+span .fa-check {
+    color: #71ba54;
+}
+
+.date-answer {
+    float: right;
+    font-size: 0.8rem;
+}
+
+.date-answer .fa-link {
+    color: #6c757d;
+}
+
+/*----------------poser une question--------------------*/
+
+.create-question {
+    color: black;
+}
+
+/* .form-control {
+    border: 1px solid lightgrey;
+} */
+
+.create-question label {
+    margin-bottom: 0; 
+}
+
+/*-------------------------Admin-------------------------*/
+
+.table thead th {
+    border-bottom: 2px solid black;
+}
+
+td i {
+    color: black;
+}
+
+.icon {
+    padding: 0 !important;
+}
+
+.icon i:hover {
+    color: var(--colorSimplon);
+} 
+/*-------------------------footer-------------------------*/
+footer {
+    font-size: 15px;
+    padding: 25px;
+}
+
+#footer {
+    width: 100%;
+    bottom: 70px;
+    margin-top: 25px;
+    background-color: #2F3239;
+    color: white;
+}
+
+#footer li {
+    list-style-type: none;
+}
+
+#footer ul {
+    padding: 0;
+}
+
+#footer li a {
+    color: white;
+    text-decoration: none;
+    transition: all;
+}
+#footer li a:hover {
+    color: var(--colorSimplon);
+}
+
+#footer-bottom {
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    background-color: rgb(34, 36, 41);
+    color: white;
+}
+
+.borderColorSimplonLeft {
+    border-left: 1px solid var(--colorSimplon);
+    border-radius: 15px;
+}
+
+.borderColorSimplonRight {
+    border-right: 1px solid var(--colorSimplon);
+    border-radius: 15px;
+    text-align: right !important;
+}
+
+.borderColorSimplonLeftAndRight {
+    border-left: 1px solid var(--colorSimplon);
+    border-right: 1px solid var(--colorSimplon);
+    border-radius: 15px;
+}
+
+
+
+/*---------------------------------------------------PAGE PROFIL-----------------------------------------------------*/
+
+.avatarFrame {
+    margin: 10px;
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+    border: 1px solid var(--colorSimplon);
+}
+
+.underlineText {
+    text-decoration: underline;
+    text-decoration-color: var(--colorSimplon);
+}
+
+.btn-question {
+    background-color: black;
+    color: white;
+}

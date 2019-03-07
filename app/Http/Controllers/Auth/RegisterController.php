@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repositories\NotificationsRepository;
+use Illuminate\Notifications;
 
 class RegisterController extends Controller
 {
@@ -71,7 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
+        // dd($data);
         $user = User::create([
             'name' => $data['name'],
             'fabric_id' => $data['fabric_id'],

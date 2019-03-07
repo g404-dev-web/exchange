@@ -3,7 +3,7 @@
 @section('content')
 
     <section class="gray-bg">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="score-container">
                     <br><br>

@@ -3,71 +3,100 @@
 @section('title', 'Inscription')
 
 @section('content')
-    <div class="login">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="page-content">
-                    <h2>Enregistrement</h2>
-                    <div class="form-style form-style-3">
-                        <form method="POST" action="{{ route('register') }}" id="registerForm">
-                            {{ csrf_field() }}
 
-                            <div class="form-inputs clearfix">
-                                <p class="login-text">
-                                    <input type="text" name="name" value="" placeholder="Nom de compte" required autofocus>
-                                    <i class="icon-user"></i>
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-                                </p>
-                                <p class="form-inputs clearfix">
-                                        {{-- <i class="icon-laptop"></i> --}}
-                                    <select name="fabric_id" required >
-                                        <option value="" disabled selected><i class="icon-laptop"></i> Quelles est votre fabrique Simplon ?</option>
-                                        @foreach ( $fabrics as $fabric )
-                                            <option value="{{ $fabric->id }}">{{ $fabric->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </p>
-                                <p class="login-text">
-                                    <input type="email" name="email" value="" placeholder="E-mail" required autofocus>
-                                    <i class="icon-envelope"></i>
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </p>
-                                <p class="login-password">
-                                    <input type="password" name="password" placeholder="Mot de passe" required>
-                                    <i class="icon-lock"></i>
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </p>
-                                <p class="login-password">
-                                    <input id="password-confirm" type="password" name="password_confirmation" placeholder="Répéter le mot de passe" required>
-                                    <i class="icon-lock"></i>
-                                </p>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-12">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3 class="card-title colorTextSimplon">Enregistrement</h3>
+                    <hr>
+                    <form method="POST" action="{{ route('register') }}" id="registerForm">
+                        {{ csrf_field() }}
+                        <div class="input-group py-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text label">
+                                    <i class="fas fa-signature"></i>
+                                </span>
                             </div>
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary active">Voulez-vous recevoir des notifications ?
-                                    <input autocomplete="off" id='checkbox' type="checkbox" onclick="enableNotifications({type:'all'})">
-                                </label>                                                      
-                            </div>                            
-                            <p class="form-submit login-submit">
-                                <input type="submit" value="S'enregistrer" class="button color small login-submit submit">
-                            </p>
-                        </form>
-                    </div>
-                </div><!-- End page-content -->
-            </div><!-- End col-md-6 -->
-        </div><!-- End row -->
-    </div><!-- End login -->
+                            <input class="form-control input-connexion" type="text" name="name" value="" placeholder="Nom de compte" required autofocus aria-describedby="basic-addon1">
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="input-group py-2">
+                            <div class="input-group-prepend ">
+                                <span class="input-group-text label">
+                                    <i class="fas fa-laptop "></i>
+                                </span>
+                            </div>
+                            <select name="fabric_id" class="custom-select input-connexion" required >
+                                <option value="" disabled selected>Quelles est votre fabrique Simplon ?</option>
+                                @foreach ( $fabrics as $fabric )
+                                    <option value="{{ $fabric->id }}">{{ $fabric->name }}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="input-group py-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text label">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                            <input class="form-control input-connexion" type="email" name="email" value="{{ old('email') }}" placeholder="E-mail" required autofocus aria-describedby="basic-addon1">
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="input-group py-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text label">
+                                    <i class="fas fa-fingerprint"></i>
+                                </span>
+                            </div>
+                            <input class="form-control input-connexion" type="password" name="password" placeholder="Mot de passe" required aria-describedby="basic-addon1">
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="input-group py-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text label">
+                                    <i class="fas fa-fingerprint"></i>
+                                </span>
+                            </div>
+                            <input class="form-control input-connexion" id="password-confirm" type="password" name="password_confirmation" placeholder="Répéter le mot de passe" required aria-describedby="basic-addon1">
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="form-control py-2">
+                            <div class="custom-control custom-checkbox">
+                                <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'all'})" id="customCheck1">
+                                <label class="custom-control-label " for="customCheck1">Voulez-vous recevoir des notifications ?</label>
+                            </div>
+                        </div>
+                        
+                        <div class="pb-3 pt-4">
+                            <input type="submit" value="S'enregistrer" class="btn-custom btn btn-block colorBackgroundSimplon ">
+                        </div>
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 

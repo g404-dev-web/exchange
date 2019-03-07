@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use App\Notification;
+use App\NotificationSubscriber;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Parsedown;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationsRepository extends Repository
 {
-    public function __construct(Notification $model)
+    public function __construct(NotificationSubscriber $model)
     {
         parent::__construct($model);
     }
