@@ -34,4 +34,9 @@ class AnswerRepository extends Repository
     {
         return $this->model->where('id', $answerId)->delete();
     }
+
+    public function answerSelected($answerId)
+    {
+        return $this->model->where('is_selected', 1)->get();
+    }
 }

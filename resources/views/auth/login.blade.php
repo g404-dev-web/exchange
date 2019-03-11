@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="row mb-4">
-        <div class="col-md-6">
+        <div class="col-md-8 col-12 offset-md-2 col-lg-6 offset-lg-3">
             <div class="card mt-4">
                 <div class="card-body">
                     <h3 class="card-title colorTextSimplon">Se connecter</h3>
@@ -54,17 +54,17 @@
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-6 ">
+
+        {{-- <div class="col-md-6 ">
             <div class="card mt-5">
                 <div class="card-body">
                     <h3 class="card-title colorTextSimplon">S'enregistrer</h3>
                     <hr>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravdio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequa. Vivamus vulputate posuere nisl quis consequat.</p>
-                    <a href="{{ url('/register') }}" class=" text-center btn btn-custom btn-block colorBackgroundSimplon">Créer un compte</a> 
+                    <a href="{{ url('/register') }}" class=" text-center btn btn-custom btn-block colorBackgroundSimplon">Créer un compte</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 @endsection

@@ -6,12 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "algolia/algoliasearch-client-php": "^1.27",
+        "algolia/algoliasearch-client-php": "^2.2",
         "benwilkins/laravel-fcm-notification": "dev-master",
         "brozot/laravel-fcm": "^1.2",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
+        "laravel/scout": "^7.1",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "rackbeat/laravel-ui-avatars": "^0.6.0"

@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Rackbeat\UIAvatars\HasAvatar;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasAvatar;
+    use HasAvatar, Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *

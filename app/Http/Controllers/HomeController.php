@@ -4,23 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use App\Question;
+use App\Repositories\AnswerRepository;
+use App\Repositories\FabricRepository;
 use App\Upvote;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Parsedown;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
 {
     protected $questionRepository;
+    protected $fabricRepository;
+    protected $answerRepository;
 
-    public function __construct(QuestionRepository $questionRepository)
+    public function __construct(QuestionRepository $questionRepository, FabricRepository $fabricRepository, AnswerRepository $answerRepository)
     {
         parent::__construct();
         $this->questionRepository = $questionRepository;
+        $this->fabricRepository = $fabricRepository;
+        $this->answerRepository = $answerRepository;
     }
 
     /**
@@ -33,7 +38,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $userQuestionPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('question_id')->all() : [];
         $userAnswerPreviousVotes = Auth::check() ? Auth::user()->upvotes->pluck('answer_id')->all() : [];
-        $fabrics = DB::table('fabrics')->get();
+        $fabrics = $this->fabricRepository->allFabrics();
 
         $id = request("filter");
         $search = request("search");
@@ -43,7 +48,7 @@ class HomeController extends Controller
         if($id) {
             $params["fabric_id"] = $id;
         }
-        
+
         if($search) {
             $params["search"] = $search;
         }
@@ -53,7 +58,6 @@ class HomeController extends Controller
         }
 
         $questions = $this->questionRepository->advancedSearch($params);
-        // dd($questions);
 
         return view('homepage', compact('questions', 'recentQuestions', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'user', 'fabrics', 'fabricId'));
     }
@@ -62,18 +66,21 @@ class HomeController extends Controller
     public function profil(){
         $user = Auth::user();
 
-        $answers_is_selected = DB::table('answers')->where('user_id', $user->id)->where('is_selected', 1)->count();
-   
+        $answers_is_selected = $this->answerRepository->answerSelected($user->id);
+
         return view('profil.index', compact('user', 'answers_is_selected'));
     }
 
     public function editProfil(Request $request){
+
+        dd($request);
         $user = Auth::user();
         $user->name = $request['name'];
         $user->name = $request['name'];
         $user->save();
 
-        return view('profil.index', compact('user'));
+        return back();
+//        return view('profil.index', compact('user'));
 
     }
 

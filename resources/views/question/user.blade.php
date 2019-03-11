@@ -11,7 +11,12 @@
     @forelse($questions as $question)
         @include("partials/question")
     @empty
-        <p> Vous n'avez pas encore posé de questions </p>
+        <div class="card">
+            <div class="card-body">
+                <p class="mt-3"> Vous n'avez pas encore posé de questions </p>
+            </div>
+        </div>
+
     @endforelse
 @endsection
 

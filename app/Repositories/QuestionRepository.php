@@ -33,18 +33,19 @@ class QuestionRepository extends Repository
         else if(isset($params["search"])) {
             return Question::search($params["search"])->get();
         }
-        
+
         $questions = $this->getModel();
 
         if(isset($params["fabric_id"])) {
             $questions = $questions
                 ->with('answers', 'upvotes', 'user')
                 ->join('users',"questions.user_id", '=', 'users.id')
+                ->select('questions.*', 'users.name', 'users.fabric_id')
                 ->where('users.fabric_id', $params["fabric_id"])
                 ->orderBy('questions.created_at', 'desc');
         }
 
-        if(isset($params["category"])) {       
+        if(isset($params["category"])) {
             $questions = $questions->with('answers', 'upvotes', 'user')
                 ->where('category', $params["category"])
                 ->orderBy('questions.created_at', 'desc');
@@ -129,7 +130,7 @@ class QuestionRepository extends Repository
     {
         return $this->model->where('id', '>', $id)->min('id');
     }
-    
+
     public function deleteQuestionById($questionId)
     {
         return $this->model->where('id', $questionId)->delete();

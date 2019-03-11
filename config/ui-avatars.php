@@ -31,7 +31,7 @@ return [
 	|
 	| Set the width and height of the image, in pixels.
 	*/
-	'image_size'       => 48,
+	'image_size'       => 240,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ return [
 	|
 	| Set the HEX for the background color.
 	*/
-	'background_color' => '#a0a0a0',
+	'background_color' => '#D3D3D3',
 
 	/*
 	|--------------------------------------------------------------------------

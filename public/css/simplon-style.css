@@ -471,7 +471,24 @@ footer {
     border-radius: 15px;
 }
 
+.chevron-back-top {
+    position: fixed;
+    right: -60px;
+    bottom: 30px;
+    background-color: var(--colorSimplon);
+    color: white;
+    padding: 6px 9px;
+    font-size: 1.8rem;
+    border-radius: 6px;
+    margin: 10px;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.4s;
+}
 
+.chevron-back-top:hover {
+    background-color: black;
+}
 
 /*---------------------------------------------------PAGE PROFIL-----------------------------------------------------*/
 

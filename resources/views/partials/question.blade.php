@@ -8,8 +8,6 @@
                 <button class="btn" type="submit" class="button question-report delete-button ">Editer</button>
             </form>
             @endif
-                {{ var_dump($question->id) }}
-                {{ var_dump($question->user_id) }}
 
             @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
             <form method="POST" action="{{route('questionLock')}}" class="btn-suppr">

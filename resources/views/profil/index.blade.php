@@ -55,7 +55,7 @@
                                     <i class="fas fa-signature "></i>
                                 </span>
                             </div>
-                            <input class="form-control input-connexion" type="text" name="name" value="{{$user->name}}" placeholder="Nom de compte" required autofocus aria-describedby="basic-addon1">
+                            <input class="form-control input-connexion" type="text" name="name" value="{{$user->name}}" placeholder="Nom de compte"  autofocus aria-describedby="basic-addon1">
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -68,7 +68,7 @@
                                     <i class="fas fa-envelope "></i>
                                 </span>
                             </div>
-                            <input class="form-control input-connexion" type="email" name="email" value="{{ old('email') }}" placeholder="E-mail" required autofocus aria-describedby="basic-addon1">
+                            <input class="form-control input-connexion" type="email" name="email" value="{{ old('email') }}" placeholder="E-mail"  autofocus aria-describedby="basic-addon1">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -81,7 +81,7 @@
                                     <i class="fas fa-fingerprint"></i>
                                 </span>
                             </div>
-                            <input class="form-control input-connexion" type="password" name="password" placeholder="Nouveau mot de passe" required aria-describedby="basic-addon1">
+                            <input class="form-control input-connexion" type="password" name="password" placeholder="Nouveau mot de passe" aria-describedby="basic-addon1">
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -94,7 +94,7 @@
                                     <i class="fas fa-fingerprint"></i>
                                 </span>
                             </div>
-                            <input class="form-control input-connexion" id="password-confirm" type="password" name="password_confirmation" placeholder="Répéter votre Nouveau mot de passe" required aria-describedby="basic-addon1">
+                            <input class="form-control input-connexion" id="password-confirm" type="password" name="password_confirmation" placeholder="Répéter votre Nouveau mot de passe" aria-describedby="basic-addon1">
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>

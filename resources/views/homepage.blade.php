@@ -31,7 +31,11 @@
                 @forelse($questions as $question)
                     @include("partials/question")
                 @empty
-                    <p>Pas encore de questions</p>
+                    <div class="card">
+                        <div class="card-body">
+                            Pas encore de questions posées.
+                        </div>
+                    </div>
                 @endforelse
                 {{--<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>--}}
             </div>

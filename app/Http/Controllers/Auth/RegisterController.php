@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repositories\NotificationsRepository;
 use Illuminate\Notifications;
+use App\Repositories\FabricRepository;
+
 
 class RegisterController extends Controller
 {
@@ -35,16 +37,27 @@ class RegisterController extends Controller
     /** @var NotificationsRepository */
     protected $notificationsRepository;
 
+    /** @var FabricRepository */
+    protected $fabricRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(NotificationsRepository $notificationsRepository)
+    public function __construct(NotificationsRepository $notificationsRepository, FabricRepository $fabricRepository)
     {
 	    parent::__construct();
         $this->middleware('guest');
         $this->notificationsRepository = $notificationsRepository;
+        $this->fabricRepository = $fabricRepository;
+    }
+
+    public function showRegistrationForm()
+    {
+        $fabrics = $this->fabricRepository->allFabrics();
+
+        return view('auth.register', compact('fabrics'));
     }
 
     /**
@@ -72,7 +85,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
         $user = User::create([
             'name' => $data['name'],
             'fabric_id' => $data['fabric_id'],
@@ -80,7 +92,6 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        
         if (isset($data['token_firebase'])) {
             $this->notificationsRepository->subscribe($data["token_firebase"], $user->id, 'all');
         }

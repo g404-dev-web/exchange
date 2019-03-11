@@ -24,6 +24,6 @@
 
 @if ($errors->any())
     <div class="alert alert-danger">
-        Please check the form below for errors
+        Please check the form below for error
     </div>
 @endif
