@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="pt-3 pb-4">
-    {{-- <h1 class="colorTextSimplon text-center mb-3">Bonjour, {{ $user->name }}</h1> --}}
+   
     <div class="card mx-3">
         <div class="card-body row">
             <div class="col-12 col-sm-2">
