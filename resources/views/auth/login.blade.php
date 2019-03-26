@@ -34,7 +34,9 @@
                             <input class="form-control input-connexion" type="password" name="password" placeholder="Mot de passe" required aria-describedby="basic-addon1">
                             <div class="input-group-append addonsPretendLogin radiusRightBtn">
                                 <span class="input-group-text label ">
-                                    <a class="colorTextWhite noTextDecoration" href="{{ route('password.request') }}">Mot de passe oublié ?</a>
+                                    <a class="colorTextWhite noTextDecoration" href="{{ route('password.request') }}">
+                                        <span class="colorTextWhite d-none d-sm-inline-block">Mot de passe </span> oublié ?
+                                    </a>
                                 </span>
                             </div>
                             @if ($errors->has('password'))

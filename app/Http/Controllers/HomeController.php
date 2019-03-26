@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Parsedown;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 
 class HomeController extends Controller
@@ -64,24 +65,38 @@ class HomeController extends Controller
 
 
     public function profil(){
-        $user = Auth::user();
+        if (Auth::check()) {
+            $user = Auth::user();
 
-        $answers_is_selected = $this->answerRepository->answerSelected($user->id);
+            $answers_is_selected = count($this->answerRepository->answerSelected($user->id));
 
-        return view('profil.index', compact('user', 'answers_is_selected'));
+            return view('profil.index', compact('user', 'answers_is_selected'));
+        }
+
+        return redirect('/login');
+
     }
 
     public function editProfil(Request $request){
 
-        dd($request);
+
         $user = Auth::user();
         $user->name = $request['name'];
         $user->name = $request['name'];
         $user->save();
 
+        if (Hash::check($request->current_password, $user->password)) {
+            $request->user()->fill([
+                'password' => Hash::make($request->new_password)
+            ])->save();
+        } else {
+            dd('bug');
+            return back();
+        }
+
+
         return back();
 //        return view('profil.index', compact('user'));
-
     }
 
     private function generatePoints()

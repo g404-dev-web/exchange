@@ -9,7 +9,7 @@
 
 @section('styles')
 
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css"> --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/solarized-light.min.css">
 
 @endsection
 
@@ -17,15 +17,15 @@
 
         <ul class="nav nav-tabs mb-4">
             <li class="nav-item">
-                <a class="nav-link {{request('filter') == 0 ? 'active' : ''}}"" href="/">SimplonS</a>
+                <a class="nav-link {{request('filter') == 0 ? 'active' : ''}}" href="/">Simplon</a>
             </li>
             @foreach ($fabrics as $fabric)
                 <li class="nav-item">
                     <a class="nav-link {{request('filter') == $fabric->id ? 'active' : ''}}" href="/?filter={{ $fabric->id }}">{{ $fabric->name }}</a>
                 </li>
             @endforeach
-        </ul>           
-        
+        </ul>
+
         <div class="tab-inner-warp">
             <div class="tab-inner">
                 @forelse($questions as $question)
@@ -40,7 +40,7 @@
                 {{--<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>--}}
             </div>
         </div>
-    
+
 
 @endsection
 
@@ -55,9 +55,9 @@
 
 @section('scripts')
 
-{{-- <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 
-<script>hljs.initHighlightingOnLoad();</script> --}}
+<script>hljs.initHighlightingOnLoad();</script>
 
 @endsection
 

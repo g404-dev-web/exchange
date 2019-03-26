@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNotificationSubscribersTable extends Migration
+class CreateNotificationsSubscribersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNotificationSubscribersTable extends Migration
      */
     public function up()
     {
-        Schema::create('notification_subscribers', function (Blueprint $table) {
+        Schema::create('notifications_subscribers', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('token_firebase', 655);
             $table->integer('user_id')->unsigned();
@@ -30,7 +30,7 @@ class CreateNotificationSubscribersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notification_subscribers');
+        Schema::dropIfExists('notifications_subscribers');
     }
 }
 

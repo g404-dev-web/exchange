@@ -14,4 +14,8 @@ class FabricRepository extends Repository
         return $this->model->get();
     }
 
+    public function fabricAdmin($fabric_id_admin) {
+        return $this->model->where('id', $fabric_id_admin)->get();
+    }
+
 }

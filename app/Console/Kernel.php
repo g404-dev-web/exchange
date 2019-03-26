@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Jobs\SendNotificationAll;
+use App\Jobs\SendNotificationReply;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->job(new SendNotificationAll(18))
+                   ->dailyAt('09:00');
+
+        $schedule->job(new SendNotificationAll(6))
+                    ->dailyAt('15:00');
     }
 
     /**

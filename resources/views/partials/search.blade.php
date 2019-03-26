@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 @if (!Auth::check())
                 <div class="text-center">
-                    <h2 class="my-5">Bienvenue sur Exchange.Help</h2>
+                    <h2 class="my-5">Bienvenue sur Simplon-Exchange.Help</h2>
                     <p class="pb-3">
                         Tous les Simplonnien.ne.s débutant.e.s font face aux mêmes problèmes/bogues/erreurs, mais n'osent pas toujours demander ou ne trouvent pas toujours les bonnes réponses.
                         <br>Sois rassuré.e, ici tu es libre de poser la question que tu veux, une réponse fiable et de confiance te sera faite par un.e autre apprenant.e, un.e ancien.ne Simplonien.ne ou un formateur.
@@ -12,7 +12,7 @@
                     </p>
                 </div>
                 @endif
-                
+
                 <form method="get" class="mt-5 mb-5">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

@@ -9,6 +9,7 @@ use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\FabricRepository;
 
 class AdminController extends Controller
 {
@@ -16,9 +17,10 @@ class AdminController extends Controller
     protected $userRepository;
     protected $questionRepository;
     protected $answerRepository;
+    protected $fabricRepository;
 
 
-    public function __construct(UserRepository $userRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository)
+    public function __construct(UserRepository $userRepository, QuestionRepository $questionRepository, AnswerRepository $answerRepository, FabricRepository $fabricRepository)
     {
         parent::__construct();
 
@@ -26,6 +28,7 @@ class AdminController extends Controller
         $this->userRepository = $userRepository;
         $this->questionRepository = $questionRepository;
         $this->answerRepository = $answerRepository;
+        $this->fabricRepository = $fabricRepository;
 
     }
 
@@ -33,8 +36,9 @@ class AdminController extends Controller
     {
         $fabric_id_admin = Auth::user()->fabric_id;
         $users = $this->userRepository->all()->where('fabric_id', $fabric_id_admin);
+        $fabric_admin = $this->fabricRepository->fabricAdmin($fabric_id_admin)->first();
 
-        return view('admin/users', compact('users'));
+        return view('admin/users', compact('users', 'fabric_admin'));
     }
 
     public function userLogin($userId)
@@ -42,6 +46,7 @@ class AdminController extends Controller
         auth()->loginUsingId($userId);
         return redirect('/');
     }
+
     public function userDelete($userId)
     {
         User::where('id', $userId)->delete();
@@ -52,7 +57,7 @@ class AdminController extends Controller
     {
         $id = $request['questionId'];
         $this->questionRepository->deleteQuestionById($id);
-        return redirect()->back();
+        return redirect("/");
     }
 
     public function deleteAnswer(Request $request)

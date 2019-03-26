@@ -39,7 +39,9 @@
     <!-- navbar bootstrap -->
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}"><span class="colorTextSimplon">Exchange</span>.Help</a>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <span class="colorTextSimplon text-wrap">Simplon-Exchange</span>.Help
+            </a><span class="badge badge-light beta">Béta</span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -77,7 +79,7 @@
                         @endif
                     </div>
                 </ul>
-            </div> 
+            </div>
         </div>
     </nav>
 </header><!-- End header -->

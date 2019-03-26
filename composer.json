@@ -7,6 +7,7 @@
     "require": {
         "php": ">=7.0.0",
         "algolia/algoliasearch-client-php": "^2.2",
+        "barryvdh/laravel-ide-helper": "^2.6",
         "benwilkins/laravel-fcm-notification": "dev-master",
         "brozot/laravel-fcm": "^1.2",
         "erusev/parsedown": "^1.7",

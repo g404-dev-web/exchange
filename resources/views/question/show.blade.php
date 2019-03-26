@@ -8,7 +8,8 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+    {{-- <!-- other link --> --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/solarized-light.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 @endsection
 
@@ -31,12 +32,12 @@
     <div class="card my-3">
         <div class="card-body">
             <h4 class="card-title colorTextSimplon">Réponses ({{ $nbrAnswers }})</h4>
-            
+
             @forelse ($answers as $answer)
                 <hr>
-                <div>                          
+                <div>
                     @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
-                        <form method="POST" action="{{route('deleteAnswer')}}" class="">
+                        <form method="POST" action="{{ route('deleteAnswer') }}" class="btn-block-admin">
                             {{ csrf_field() }}
                             <input type="hidden" value="{{$answer->id}}" name="answerId">
                             <button class="btn btn-admin mb-2" type="submit" onclick="return confirm('Confirmer la suppression ?')" class="button question-report delete-button ">Supprimer</button>
@@ -54,7 +55,7 @@
                         <div class="text-muted">
                             <i class="far fa-clock"></i> {{ $answer->created_at }}<a href="#comment-{{$answer->id}}" > <i class="fas fa-link"></i></a>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="clearfix"></div>
 
@@ -71,7 +72,7 @@
                                 <span><i class="my-1 fas fa-check"></i></span>
                             </li>
                         @endif
-                      
+
                         @if(in_array($answer->id, $userQuestionPreviousVotes))
                             <li class="list-unstyled my-1">
                                 <input type="submit" value="▲"
@@ -91,13 +92,12 @@
                             {{ count($answer->upvotes) }}
                         </div>
                     </div>
-                    
+
                     <div class="card-text d-inline-block col-11 align-middle mt-2">
                         <p>{!! strip_tags($answer->description, '<a><b><blockquote><code><del><dd><dl><dt><em><h1><h2><h3><i><kbd><li><ol><p><pre><s><sup><sub><strong><strike><ul><br><hr>')!!}</p>
                     </div>
-                    
                 </div>
-                
+
             @empty
                 <p class="mt-4">Il n'y a pas encore de réponse pour cette question.</p>
             @endforelse
@@ -106,15 +106,6 @@
 
     <div class="card">
         <div class="card-body">
-            @if (Auth::check() && Auth::user()->is_admin == 1 && !$question->is_locked )
-                <div id="lock-button" class="page-content clearfix ">
-                    {!! Form::open(['action' => 'AdminController@lockQuestion', 'method' => 'post']) !!}
-                    {!! Form::hidden('question_id', $question->id) !!}
-                    {!! Form::submit('Fermer cette question', ['id' => 'submit', 'class' => 'btn btn-custom colorBackgroundSimplon col-12 col-sm-8 offset-sm-2 col-md-4 offset-md-4']) !!}
-                    {!! Form::close() !!}
-                </div>
-                <hr>
-            @endif
 
             @if ($question->is_locked)
                 <div class="mt-3">
@@ -133,6 +124,8 @@
                     <h4 class="colorTextSimplon">Répondre</h4>
                     {!! Form::open(['action' => 'AnswerController@store', 'method' => 'post']) !!}
                     {!! Form::hidden('question_id', $question->id) !!}
+                    {!! Form::hidden('question_user_id', $question->user_id) !!}
+
                     <label class="required mt-3" for="description">Votre réponse<span class="colorTextSimplon"> *</span></label>
                     {!! Form::textarea('description', null, [
                         'id'      => 'description',
@@ -146,7 +139,7 @@
                     @endif
                     {!! Form::submit('Postez votre Réponse', ['id' => 'submit', 'class' => 'btn btn-custom btn-block colorBackgroundSimplon my-3']) !!}
                     {!! Form::close() !!}
-                
+
             @else
                 <a class="btn btn-custom colorBackgroundSimplon col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4" href="{{route('login')}}">Connectez vous pour répondre</a>
             @endif

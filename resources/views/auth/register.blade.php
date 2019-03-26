@@ -18,7 +18,7 @@
                                     <i class="fas fa-signature"></i>
                                 </span>
                             </div>
-                            <input class="form-control input-connexion" type="text" name="name" value="" placeholder="Nom de compte" required autofocus aria-describedby="basic-addon1">
+                            <input class="form-control input-connexion" type="text" name="name" value="" placeholder="Nom d'utilisateur" required autofocus aria-describedby="basic-addon1">
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -82,12 +82,12 @@
                                 </span>
                             @endif
                         </div>
-                        {{-- <div class="form-control py-2">
+                        <div class="form-control py-2">
                             <div class="custom-control custom-checkbox">
-                                <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'all'})" id="customCheck1">
-                                <label class="custom-control-label " for="customCheck1">Voulez-vous recevoir des notifications ?</label>
+                                <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'all'})" id="checkboxNotification">
+                                <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications ?</label>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="pb-3 pt-4">
                             <input type="submit" value="S'enregistrer" class="btn-custom btn btn-block colorBackgroundSimplon ">
                         </div>

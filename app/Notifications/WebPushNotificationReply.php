@@ -4,25 +4,24 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 use Benwilkins\FCM\FcmMessage;
 
-class WebPushNotifications extends Notification
+class WebPushNotificationReply extends Notification
 {
     use Queueable;
 
-    private $numberQuestions;
+    protected $questionTitle;
 
     /**
      * Create a new notification instance.
      *
-     * @param $numberQuestions
+     * @param $questionTitle
      */
-    public function __construct($numberQuestions)
+    public function __construct($questionTitle)
     {
-        $this->numberQuestions = $numberQuestions;
+        $this->questionTitle = $questionTitle;
     }
 
     /**
@@ -31,7 +30,7 @@ class WebPushNotifications extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
         return ['fcm'];
     }
@@ -39,10 +38,9 @@ class WebPushNotifications extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail()
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')
@@ -53,23 +51,29 @@ class WebPushNotifications extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray()
     {
         return [
             //
         ];
     }
 
-    public function toFcm() 
+    /**
+     *
+     * @param  mixed $notifiable
+     *
+     * @return FcmMessage
+     */
+    public function toFcm($notifiable)
     {
+
         $message = new FcmMessage();
         $message->content([
-            'title'        => "Nouveau message de Simplon-Exchange.help",
-            'body'         => $this->numberQuestions . ' nouvelles questions ont été posés.',
-            'sound'        => '', // Optional 
+            'title'        => "Votre question '" . $this->questionTitle . "' a reçu une réponse",
+            'body'         => "",
+            'sound'        => '', // Optional
             'icon'         => '', // Optional
             'click_action' => '' // Optional
         ])->data([

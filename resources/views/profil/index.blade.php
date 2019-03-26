@@ -9,7 +9,7 @@
     <div class="card mx-3">
         <div class="card-body row">
             <div class="col-12 col-sm-2">
-                <div class='avatarFrame'> 
+                <div class='avatarFrame'>
                 <span class="badge badge-danger" style="
                     position: absolute;
                     top: 20px;
@@ -36,7 +36,7 @@
                         <h6>Parcour les questions de la communauté et donne tes réponses</h6>
                         <a class="btn btn-danger" href="{{ route('questions.index') }}">Donne une réponse</a>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
@@ -45,65 +45,89 @@
             <div class="card col-md-6 col-12 ">
                 <div class="card-body ">
                     <div class="align-self-center">
-                    <h2 class="colorTextSimplon text-center pb-3">Mon profil</h2>
-                    <hr class="pb-3">
-                    <form method="POST" action="{{ route('profil.editProfil') }}">
-                        {{ csrf_field() }}
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text label">
-                                    <i class="fas fa-signature "></i>
-                                </span>
+                        <h2 class="colorTextSimplon text-center pb-3">Mon profil</h2>
+                        <hr class="pb-3">
+                        <form method="POST" action="{{ route('profil.editProfil') }}">
+                            {{ csrf_field() }}
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text label">
+                                        <i class="fas fa-signature "></i>
+                                    </span>
+                                </div>
+                                <input class="form-control input-connexion" type="text" name="name" value="{{$user->name}}" placeholder="Nom de compte"  autofocus>
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <input class="form-control input-connexion" type="text" name="name" value="{{$user->name}}" placeholder="Nom de compte"  autofocus aria-describedby="basic-addon1">
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text label">
-                                    <i class="fas fa-envelope "></i>
-                                </span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text label">
+                                        <i class="fas fa-envelope "></i>
+                                    </span>
+                                </div>
+                                <input class="form-control input-connexion" type="email" name="email" value="{{ old('email') }}" placeholder="E-mail"  autofocus>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
-                            <input class="form-control input-connexion" type="email" name="email" value="{{ old('email') }}" placeholder="E-mail"  autofocus aria-describedby="basic-addon1">
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text label">
-                                    <i class="fas fa-fingerprint"></i>
-                                </span>
+
+                            <div>
+                                <a class="btn btn-dark mb-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Changer de mot de passe
+                                </a>
                             </div>
-                            <input class="form-control input-connexion" type="password" name="password" placeholder="Nouveau mot de passe" aria-describedby="basic-addon1">
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text label">
-                                    <i class="fas fa-fingerprint"></i>
-                                </span>
+                            <div class="collapse col-12" id="collapseExample">
+                                <div class="card card-body mb-2">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text label">
+                                                <i class="fas fa-fingerprint"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control input-connexion" type="password" name="current_password" placeholder="Mot de passe actuel">
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text label">
+                                                <i class="fas fa-fingerprint"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control input-connexion" type="password" name="new_password" placeholder="Nouveau mot de passe" >
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text label">
+                                                <i class="fas fa-fingerprint"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control input-connexion" type="password" name="password_confirmation" placeholder="Répéter votre Nouveau mot de passe" aria-describedby="basic-addon1">
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                            <input class="form-control input-connexion" id="password-confirm" type="password" name="password_confirmation" placeholder="Répéter votre Nouveau mot de passe" aria-describedby="basic-addon1">
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <input type="submit" value="Mettre à jour" class="btn btn-custom btn-block colorBackgroundSimplon">
-                    </form>
-                </div>
+
+                            <input type="submit" value="Mettre à jour" class="btn btn-custom btn-block colorBackgroundSimplon">
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card col-md-6 col-12">

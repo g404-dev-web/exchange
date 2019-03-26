@@ -14,10 +14,10 @@
             <h4 class="card-title colorTextSimplon">Posez votre question</h4>
             <hr>
             <p class="card-text my-4">La précision et la rapidité de la réponse passe par une question correctement posée. Votre titre doit être explicite, votre question pas globale mais spécifique.</p>
-            <p class="card-text my-4">Si vous faites face à un bug, copier le code nécessaire à la résolution.</p>      
-        
-            {!! Form::open(['action' => $question ? 'AdminController@updateQuestion' : 'QuestionController@store', 'method' => 'post']) !!}
-            
+            <p class="card-text my-4">Si vous faites face à un bug, copiez le code nécessaire à la résolution.</p>
+
+            {!! Form::open(['action' => $question ? 'AdminController@updateQuestion' : 'QuestionController@store', 'method' => 'post', 'id' => 'registerForm']) !!}
+
             <div class="form-group my-4">
                 {{-- <label class="required">Intitulé de la question<span class="colorTextSimplon"> *</span></label> --}}
                 <div class="input-group">
@@ -26,13 +26,13 @@
                     </div>
                     {!! Form::text('title', ($question) ? $question->title : null, ['class' => 'form-control', 'id' => 'inputGroupSelect01'] ) !!}
                 </div>
-                
+
                 @if ($errors->has('title'))
                     <span class="color form-description">
                         <strong>{{ $errors->first('title') }}</strong>
                     </span>
                 @else
-                    <div class="small text-center text-muted ">Choisir un titre approprié et explicite est la première étape</div>
+                    <div class="small mt-2 text-muted">Choisir un titre approprié et explicite est la première étape</div>
                 @endif
             </div>
             <div class="form-group my-5">
@@ -63,25 +63,25 @@
                                     'devops' => 'Dev Ops',
                                     'other' => 'Other'
                                 ],
-                            ], $question ? $question->category : null, ['id' => 'inputGroupSelect02', 'class' => 'custom-select', 'placeholder' => ($question) ? $question->category : 'Choisissez une catégorie...']) !!}             
+                            ], $question ? $question->category : null, ['id' => 'inputGroupSelect02', 'class' => 'custom-select', 'placeholder' => ($question) ? $question->category : 'Choisissez une catégorie...']) !!}
                 </div>
                 @if ($errors->has('category'))
                     <div class="color form-description">
                         <strong>{{ $errors->first('category') }}</strong>
                     </div>
                 @else
-                    <div class="small text-center text-muted">Choisir de manière pertinente la catégorie, ne pas tout ranger dans other !</div>
+                    <div class="small mt-2 text-muted">Choisir de manière pertinente la catégorie, ne pas tout ranger dans other !</div>
                 @endif
 
                 @if ($question)
                     {!! Form::hidden('questionId', $question->id ) !!}
                 @endif
             </div>
-        
-            
+
+
             <div id="form-group">
                 <p>
-                    <label class="required">Details<span class="colorTextSimplon"> *</span></label>
+                    <label class="required">Details<span class="pl-2 colorTextSimplon">*</span></label>
                     {{--<textarea id="question-details" name="description" aria-required="true" cols="58" rows="8"></textarea>--}}
                     {!! Form::textarea('description', ($question) ? $question->description : null, [
                         'id'      => 'question-details',
@@ -97,6 +97,14 @@
                     @endif
                 </p>
             </div>
+
+            <div class="form-control py-2">
+                <div class="custom-control custom-checkbox">
+                    <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'question'})" id="checkboxNotification">
+                    <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications quand une réponse est publié ?</label>
+                </div>
+            </div>
+
             {!! Form::submit('Publiez votre question!', ['class' => 'my-3 btn btn-custom colorBackgroundSimplon col-12']) !!}
 
             {!! Form::close() !!}

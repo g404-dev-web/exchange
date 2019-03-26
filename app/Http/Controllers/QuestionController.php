@@ -6,6 +6,7 @@ use App\Answer;
 use App\Http\Requests\StoreQuestion;
 use App\Question;
 use App\Repositories\AnswerRepository;
+use App\Repositories\NotificationsRepository;
 use App\Repositories\QuestionRepository;
 use Auth;
 use Parsedown;
@@ -15,13 +16,15 @@ class QuestionController extends Controller
 {
     protected $questionRepository;
     protected $answerRepository;
+    private $notificationsRepository;
 
-    public function __construct(QuestionRepository $questionRepository, AnswerRepository $answerRepository)
+    public function __construct(QuestionRepository $questionRepository, AnswerRepository $answerRepository, NotificationsRepository $notificationsRepository)
     {
         parent::__construct();
 
         $this->questionRepository = $questionRepository;
         $this->answerRepository = $answerRepository;
+        $this->notificationsRepository = $notificationsRepository;
         $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
     }
 
@@ -77,8 +80,13 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestion $request)
     {
+
         $requestData = $request->all();
         $question = $this->questionRepository->create($requestData);
+
+        if (isset($requestData['token_firebase'])) {
+            $this->notificationsRepository->subscribe($requestData["token_firebase"], $question->user_id, 'question', $question->id);
+        }
 
         $this->currentUser->points += 10;
         $this->currentUser->save();

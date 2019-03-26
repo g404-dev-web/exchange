@@ -1,24 +1,41 @@
 <div class="card mt-3 shadow-sm">
     <div class="card-body">
         <a class="card-link title-card colorTextSimplon" href="{{ url('/questions/'.$question->id) }}">{{ $question->title }}</a>
-        @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
-            <form method="POST" action="{{route('questionEdit')}}" class="btn-editer ml-2">
-                {{ csrf_field() }}
-                <input type="hidden" value="{{$question->id}}" name="questionId">
-                <button class="btn" type="submit" class="button question-report delete-button ">Editer</button>
-            </form>
+        <div class="btn-block-admin">
+            @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
+                <form method="POST" action="{{ route('questionEdit') }}" class="btn-admin ">
+                    {{ csrf_field() }}
+                    <input type="hidden" value="{{$question->id}}" name="questionId">
+                    <button class="btn" type="submit">Editer</button>
+                </form>
             @endif
 
             @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
-            <form method="POST" action="{{route('questionLock')}}" class="btn-suppr">
-                {{ csrf_field() }}
-                <input type="hidden" value="{{$question->id}}" name="questionId">
-                <button class="btn" type="submit" onclick="return confirm('Confirmer la fermeture ?')" class="button question-report delete-button ">Supprimer</button>
-            </form>
-        @endif
+                <form method="POST" action="{{ route('deleteQuestion') }}" class="btn-admin mx-2">
+                    {{ csrf_field() }}
+                    <input type="hidden" value="{{$question->id}}" name="questionId">
+                    <button class="btn" type="submit" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
+                </form>
+            @endif
+
+            @if (Auth::check() && Auth::user()->is_admin == 1 && !$question->is_locked )
+                <div class="btn-admin">
+                    {!! Form::open(['action' => 'AdminController@lockQuestion', 'method' => 'post']) !!}
+                    {!! Form::hidden('question_id', $question->id) !!}
+                    {!! Form::submit('Fermer cette question', ['id' => 'submit', 'class' => 'btn']) !!}
+                    {!! Form::close() !!}
+                </div>
+                <hr>
+            @endif
+        </div>
+
+
+
         <div class="card-subtitle mb-2 mt-2 text-muted clearfix">
             <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
         </div>
+
+        <hr>
 
         <div class="d-inline-flex flex-column align-middle">
             @if(in_array($question->id, $userQuestionPreviousVotes))

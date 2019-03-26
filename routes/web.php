@@ -15,8 +15,8 @@ use App\Notifications\SomeNotifications;
 
 Auth::routes();
 Route::post("/notifications/all", "NotificationsController@subscribeAll");
-Route::post("/notifications/question/{id}", "NotificationsController@subscribeQuestion");
-Route::get("/notifications/test", "NotificationsController@send");
+Route::get("/notifications/question/{id}", "NotificationsController@sendReply");
+//Route::get("/notifications/test", "NotificationsController@sendReply");
 
 Route::get('/', 'HomeController@index');
 //Route::get('/filter/{id}', 'HomeController@index');

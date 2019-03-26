@@ -81,7 +81,7 @@ return [
 	|
 	| Set the HEX for the background color.
 	*/
-	'background_color' => '#D3D3D3',
+	'background_color' => '#e8e8e8',
 
 	/*
 	|--------------------------------------------------------------------------

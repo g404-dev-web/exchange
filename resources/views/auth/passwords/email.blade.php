@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-6 offset-md-3 mt-5">
         <div class="card">
             <div class="card-body">
-                <h3 class="text-center card-title colorTextSimplon">Reset Password</h3>
+                <h3 class="card-title colorTextSimplon">Réinitialiser votre mot de passe</h3>
                 <hr>
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -14,19 +14,26 @@
                 @endif
                 <form method="post" action="{{ route('password.email') }}">
                     {{ csrf_field() }}
-                    <div class="input-group my-4">
+                    <div class="input-group py-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text label" id="basic-addon1">Email</span>
+                            <span class="input-group-text label" id="basic-addon1">
+                                <i class="fas fa-envelope"></i>
+                            </span>
                         </div>
-                        <input type="text" name="email" value="{{ old('email') }}" class="form-control" aria-describedby="basic-addon1">
+                        <input class="form-control input-connexion" type="email" name="email" value="{{ old('email') }}" placeholder="E-mail" required autofocus aria-describedby="basic-addon1">
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                        @endif
                     </div>
-                    <input type="submit" value="Envoyer le lien pour réinitialiser le mot de passe" class="btn btn-custom colorBackgroundSimplon btn-block">
+                    <input type="submit" value="Envoyer" class="btn btn-custom colorBackgroundSimplon btn-block mt-3">
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="login">
+    {{--<div class="login">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="page-content">
@@ -60,6 +67,6 @@
                 </div><!-- End page-content -->
             </div><!-- End col-md-6 -->
         </div><!-- End row -->
-    </div><!-- End login -->
+    </div><!-- End login -->--}}
 
 @endsection

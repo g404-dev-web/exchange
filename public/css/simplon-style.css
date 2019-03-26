@@ -101,7 +101,7 @@ body {
 }
 
 .colorTextWhite {
-    color: white;
+    color: white!important;
 }
 
 .textBolder{
@@ -123,12 +123,12 @@ body {
 }
 
 #header {
-    position: relative; 
+    position: relative;
 }
 
 .radiusRightBtn {
     border-top-right-radius: 5%;
-    border-bottom-right-radius: 5%; 
+    border-bottom-right-radius: 5%;
 }
 
 .navbar {
@@ -183,7 +183,7 @@ body > section {
 .label {
     background-color: black;
     color: white;
-    border: white;
+    border: black;
 }
 
 .btn:focus {
@@ -208,7 +208,7 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 input[type="checkbox"]:focus,
 .uneditable-input:focus,
-.custom-control-input:focus ~ .custom-control-label::before {   
+.custom-control-input:focus ~ .custom-control-label::before {
   border-color: grey;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(124, 128, 123, 0.6);
   outline: 0 none;
@@ -255,6 +255,16 @@ input[type="checkbox"]:focus,
     border: var(--colorSimplon);
 }
 
+.navbar-brand {
+    position: relative;
+}
+
+.beta {
+    position: absolute;
+    top: 12px;
+    left: 365px;
+}
+
 .title-card {
     text-decoration: none;
     font-size: 1.5rem;
@@ -265,18 +275,22 @@ input[type="checkbox"]:focus,
     color: var(--colorSimplon);
 }
 
-.btn-editer, .btn-suppr {
+.btn-block-admin {
     float: right;
+}
+
+.btn-admin {
     background-color: black;
     border-radius: 5%;
 }
 
-.btn-editer .btn, .btn-suppr .btn, button.btn-admin{
+
+.btn-admin .btn, button.btn-admin{
     color: white;
     font-size: 0.8rem;
 }
 
-.btn-editer:hover, .btn-suppr:hover, .btn-admin:hover, .btn-question:hover {
+.btn-admin:hover, .btn-question:hover {
     background-color: var(--colorSimplon);
     color: white;
 }
@@ -395,7 +409,7 @@ span .fa-check {
 } */
 
 .create-question label {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 /*-------------------------Admin-------------------------*/
@@ -414,7 +428,7 @@ td i {
 
 .icon i:hover {
     color: var(--colorSimplon);
-} 
+}
 /*-------------------------footer-------------------------*/
 footer {
     font-size: 15px;
@@ -508,4 +522,38 @@ footer {
 .btn-question {
     background-color: black;
     color: white;
+}
+
+
+/*Upvote*/
+.question-vote-up{
+    background-color: black;
+    color: #f3f3f3!important;
+    transition: all 0.4s;
+}
+.question-vote-up:hover{
+    background-color: var(--colorSimplon);
+    color: white!important;
+}
+
+/*Hack navbar*/
+@media (max-width: 991.98px){
+    .navbar-expand-lg>.container, .navbar-expand-lg>.container-fluid {
+        padding: 0 15px!important;
+    }
+}
+
+/*Card hover*/
+.card{
+    transition: all .2s;
+}
+.card:hover{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+/*Question input*/
+.create-question label.input-group-text {
+    background-color: black;
+    color: white;
+    border: black;
 }

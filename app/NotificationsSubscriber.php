@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class NotificationSubscriber extends Model
+class NotificationsSubscriber extends Model
 {
     use Notifiable;
     
@@ -51,9 +51,10 @@ class NotificationSubscriber extends Model
     /**
      * Route notifications for the FCM channel.
      *
+     * @param  \Illuminate\Notifications\Notification  $notification
      * @return string
      */
-    public function routeNotificationForFcm()
+    public function routeNotificationForFcm($notification)
     {
         return $this->token_firebase;
     }
