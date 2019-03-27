@@ -26,4 +26,5 @@
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
 @endsection

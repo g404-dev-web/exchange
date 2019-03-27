@@ -6,7 +6,7 @@
                 <form method="POST" action="{{ route('questionEdit') }}" class="btn-admin ">
                     {{ csrf_field() }}
                     <input type="hidden" value="{{$question->id}}" name="questionId">
-                    <button class="btn" type="submit">Editer</button>
+                    <button class="btn" type="submit" data-toggle="tooltip" data-placement="top" title="Editer"><i class="fas fa-edit"></i></button>
                 </form>
             @endif
 
@@ -14,17 +14,27 @@
                 <form method="POST" action="{{ route('deleteQuestion') }}" class="btn-admin mx-2">
                     {{ csrf_field() }}
                     <input type="hidden" value="{{$question->id}}" name="questionId">
-                    <button class="btn" type="submit" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
+                    <button class="btn" type="submit" data-toggle="tooltip" data-placement="top" title="Supprimer"
+                            onclick="return confirm('Confirmer la suppression ?')">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </form>
             @endif
 
             @if (Auth::check() && Auth::user()->is_admin == 1 && !$question->is_locked )
-                <div class="btn-admin">
+                    <form method="post" action="{{ route('questionLock') }}" class="btn-admin">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="question_id" value="{{ $question->id }}">
+                        <button type="submit" id="submit" class="btn" data-toggle="tooltip" data-placement="top" title="Fermer la question">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
+                {{--<div class="btn-admin">
                     {!! Form::open(['action' => 'AdminController@lockQuestion', 'method' => 'post']) !!}
                     {!! Form::hidden('question_id', $question->id) !!}
                     {!! Form::submit('Fermer cette question', ['id' => 'submit', 'class' => 'btn']) !!}
                     {!! Form::close() !!}
-                </div>
+                </div>--}}
                 <hr>
             @endif
         </div>
@@ -41,7 +51,7 @@
             @if(in_array($question->id, $userQuestionPreviousVotes))
                 <li class="list-unstyled mb-1">
                     <input type="submit" value="▲"
-                        class=""
+                        class="upVoted"
                         title='Vous avez déjà upvoté cette question'>
                 </li>
             @else
@@ -74,5 +84,3 @@
         </div>
     </div>
 </div>
-
-

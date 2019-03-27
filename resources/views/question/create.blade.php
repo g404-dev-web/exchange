@@ -80,28 +80,26 @@
 
 
             <div id="form-group">
-                <p>
-                    <label class="required">Details<span class="pl-2 colorTextSimplon">*</span></label>
-                    {{--<textarea id="question-details" name="description" aria-required="true" cols="58" rows="8"></textarea>--}}
-                    {!! Form::textarea('description', ($question) ? $question->description : null, [
-                        'id'      => 'question-details',
-                        'cols'    => 58,
-                        'rows'    => 8
-                    ]) !!}
-                    @if ($errors->has('description'))
-                        <span class="color form-description">
-                            <strong>{{ $errors->first('description') }}</strong>
-                        </span>
-                    @else
-                        <div class="small text-center text-muted">Ecrire la description de votre problème en entrant tous les détails possibles qui en permettront la résolution.</div>
-                    @endif
-                </p>
+                <label class="required">Details<span class="pl-2 colorTextSimplon">*</span></label>
+                {{--<textarea id="question-details" name="description" aria-required="true" cols="58" rows="8"></textarea>--}}
+                {!! Form::textarea('description', ($question) ? $question->description : null, [
+                    'id'      => 'question-details',
+                    'cols'    => 58,
+                    'rows'    => 8
+                ]) !!}
+                @if($errors->has('description'))
+                    <span class="color form-description">
+                        <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                @else
+                    <div class="small text-center text-muted mb-4">Ecrire la description de votre problème en entrant tous les détails possibles qui en permettront la résolution.</div>
+                @endif
             </div>
 
             <div class="form-control py-2">
                 <div class="custom-control custom-checkbox">
                     <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'question'})" id="checkboxNotification">
-                    <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications quand une réponse est publié ?</label>
+                    <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications quand une réponse est publiée ?</label>
                 </div>
             </div>
 

@@ -300,7 +300,6 @@ input[type="checkbox"]:focus,
 }
 
 .list-unstyled input[value="▲"] {
-    /* background: lightgray; */
 	color: inherit;
 	border: none;
 	padding: 0 15px;
@@ -311,6 +310,15 @@ input[type="checkbox"]:focus,
     border-radius: 3px;
 }
 
+.upVoted {
+    background-color: #f3f3f3;
+    cursor: default !important;
+}
+
+input[title~="vous avez déjà upvoté"] {
+    border: 5px solid yellow;
+}
+
 .nbVotes {
     background-color: #f3f3f3;
 }
@@ -319,10 +327,10 @@ input[type="checkbox"]:focus,
     font-size: 0.9rem;
 }
 
-.list-unstyled .upvote:hover {
+/*.list-unstyled .upvote:hover {
     background: white;
 	color: var(--colorSimplon);
-}
+}*/
 
 .link-card, .link-card .card-link {
     font-size: 0.8rem;

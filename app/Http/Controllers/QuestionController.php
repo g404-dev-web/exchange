@@ -101,6 +101,7 @@ class QuestionController extends Controller
      *
      * @param  int $id
      *
+     * @param AnswerRepository $answerRepository
      * @return \Illuminate\View\View
      */
     public function show($id, AnswerRepository $answerRepository)
@@ -119,6 +120,8 @@ class QuestionController extends Controller
         $nbrAnswers = $answerRepository->count($id);
 
         $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
+
+//        dd($userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : []);
         $userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : [];
 
         $Parsedown = new Parsedown();

@@ -40,7 +40,10 @@
                         <form method="POST" action="{{ route('deleteAnswer') }}" class="btn-block-admin">
                             {{ csrf_field() }}
                             <input type="hidden" value="{{$answer->id}}" name="answerId">
-                            <button class="btn btn-admin mb-2" type="submit" onclick="return confirm('Confirmer la suppression ?')" class="button question-report delete-button ">Supprimer</button>
+                            <button class="btn btn-admin mb-2" type="submit" data-toggle="tooltip" data-placement="top" title="Supprimer la question"
+                                    onclick="return confirm('Confirmer la suppression ?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </form>
                     @endif
 
@@ -76,7 +79,7 @@
                         @if(in_array($answer->id, $userQuestionPreviousVotes))
                             <li class="list-unstyled my-1">
                                 <input type="submit" value="▲"
-                                       class=""
+                                       class="upVoted"
                                        title='Vous avez déjà upvoté cette réponse'>
                             </li>
                         @else
@@ -145,9 +148,11 @@
             @endif
         </div>
     </div>
+
 @endsection
 
 @section('scripts')
+    //hey ho !
     <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 
@@ -169,4 +174,5 @@
             }
         }
     </script>
+
 @endsection
