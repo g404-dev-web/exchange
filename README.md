@@ -30,3 +30,7 @@ Un formateur peut également utiliser Exchange comme base pour un projet d'appre
 - Refonte du back end avec Symfony
 
 Un guide extensif de contribution est [disponible ici](https://gitlab.com/simplon-roanne/exchange/blob/master/CONTRIBUTING.md)
+
+# Code de conduite
+
+Disponible en anglais  [sur cette page](https://gitlab.com/simplon-roanne/exchange/blob/master/CODE-OF-CONDUCT.md)
