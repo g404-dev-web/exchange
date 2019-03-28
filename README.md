@@ -1,20 +1,29 @@
-# Exchange
 
-Un clone très léger de stackoverflow destiné aux débutants.
+
+# A propos
+
+Exchange est un clone de StackOverflow destiné aux débutants, et particulièrement aux Simploniens.
+C'est également un outil destiné aux formateurs, pour leur permettre notamment de centraliser les réponses données pendant certaines phases de l'apprentissage.
+
+## Comment ça marche
+On y trouve les concepts majeurs d'un outil type question/réponse, avec un système de vote permettant de trier automatiquement les questions les plus pertinentes.
 
 ## Technos
 
-PHP7 / Laravel / SQL
+PHP7 / Laravel 5.7 / SQL
 
-## Pour contribuer :
+# Comment contribuer 
 
-- `git clone https://gitlab.com/simplon-roanne/exchange`
-- `cd exchange`
-- `composer install`
--  Copier .env.example vers .env et remplir les informations de votre base de donnée DB
-- `php artisan migrate`
-- `php artisan db:seed`
+Si vous souhaitez aider à développer Exchange, merci et bienvenue. Chacun peut contribuer à sa façon :
+Un apprenant peut :
+- Reporter des bugs
+- Corriger des bugs
+- Proposer des contributions
+- Développer les contributions validées
 
-## Mise à jour du projet
+Un formateur peut également utiliser Exchange comme base pour un projet d'apprentissage. Par exemple :
+- Création d'une PWA connectée à l'API d'Exchange
+- Refonte du front end avec un framework JS ( React/Vue/Angular )
+- Refonte du back end avec Symfony
 
-- `php artisan migrate:refresh --seed`
+Un guide extensif de contribution est [disponible ici](https://gitlab.com/simplon-roanne/exchange/blob/master/CONTRIBUTING.md)
