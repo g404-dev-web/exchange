@@ -77,7 +77,9 @@
                 @if($question->hasSelectedAnswer)
                     <span class="ml-3"><i class="fas fa-check"></i> Solution trouvée</span>
                 @endif
-                <span class="ml-3 colorBackgroundSimplon fabric-span">{{ $question->user->fabric->name }}</span>
+                @foreach($question->user->fabrics as $fabric)
+                    <span class="ml-3 colorBackgroundSimplon fabric-span">{{ $fabric->name }}</span>
+                @endforeach
 
                 <a href="/?category={{ $question->category }}" class="float-right card-link ml-3"><i class="fas fa-tags"></i> {{ $question->category }}</a>
                 <div class="clearfix"></div>

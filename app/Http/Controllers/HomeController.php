@@ -14,15 +14,17 @@ use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-
 class HomeController extends Controller
 {
     protected $questionRepository;
     protected $fabricRepository;
     protected $answerRepository;
 
-    public function __construct(QuestionRepository $questionRepository, FabricRepository $fabricRepository, AnswerRepository $answerRepository)
-    {
+    public function __construct(
+        QuestionRepository $questionRepository,
+        FabricRepository $fabricRepository,
+        AnswerRepository $answerRepository
+    ) {
         parent::__construct();
         $this->questionRepository = $questionRepository;
         $this->fabricRepository = $fabricRepository;
@@ -46,25 +48,37 @@ class HomeController extends Controller
         $category = request("category");
         $params = [];
 
-        if($id) {
+        if ($id) {
             $params["fabric_id"] = $id;
         }
 
-        if($search) {
+        if ($search) {
             $params["search"] = $search;
         }
 
-        if($category) {
+        if ($category) {
             $params["category"] = $category;
         }
 
         $questions = $this->questionRepository->advancedSearch($params);
 
-        return view('homepage', compact('questions', 'recentQuestions', 'userAnswerPreviousVotes', 'userQuestionPreviousVotes', 'user', 'fabrics', 'fabricId'));
+        return view(
+            'homepage',
+            compact(
+                'questions',
+                'recentQuestions',
+                'userAnswerPreviousVotes',
+                'userQuestionPreviousVotes',
+                'user',
+                'fabrics',
+                'fabricId'
+            )
+        );
     }
 
 
-    public function profil(){
+    public function profil()
+    {
         if (Auth::check()) {
             $user = Auth::user();
 
@@ -74,12 +88,10 @@ class HomeController extends Controller
         }
 
         return redirect('/login');
-
     }
 
-    public function editProfil(Request $request){
-
-
+    public function editProfil(Request $request)
+    {
         $user = Auth::user();
         $user->name = $request['name'];
         $user->name = $request['name'];
