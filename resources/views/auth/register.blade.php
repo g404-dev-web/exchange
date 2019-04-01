@@ -37,13 +37,25 @@
                                     <option value="{{ $fabric->id }}">{{ $fabric->name }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
                         </div>
-                        <div class="input-group py-3">
+                        {{-- <div class="form-control py-2 my-2  ">
+                            <div class="custom-control custom-checkbox">
+                                <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'all'})" id="checkboxAdmin">
+                                <label class="custom-control-label " for="checkboxAdmin">Je suis formateur et veux être admin</label>
+                            </div>
+                        </div> --}}
+                        <div class="input-group py-2">
+                            <div class="input-group-prepend ">
+                                <span class="input-group-text label">
+                                    <i class="fas fa-laptop "></i>
+                                </span>
+                            </div>
+                            <select name="want_is_admin" class="custom-select input-connexion" required >
+                                <option value="0" selected>Je suis un.e apprenant.e</option>
+                                <option value="1" >Je suis un.e formateur.trice</option>
+                            </select>
+                        </div>
+                        <div class="input-group py-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text label">
                                     <i class="fas fa-envelope"></i>

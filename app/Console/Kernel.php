@@ -31,6 +31,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->job(new SendNotificationAll(6))
                     ->dailyAt('15:00');
+
+        //$schedule->job(new SendNotificationAll(12))->everyMinute();
     }
 
     /**

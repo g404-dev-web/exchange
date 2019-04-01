@@ -1,5 +1,5 @@
-<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
-{{-- <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script> --}}
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase-messaging.js"></script>
 
 <script>
     // Initialize Firebase

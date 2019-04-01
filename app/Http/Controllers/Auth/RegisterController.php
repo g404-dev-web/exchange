@@ -68,12 +68,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        dump('ppl');
         return Validator::make($data, [
             'name' => 'required|string|max:255|unique:users',
             'fabric_id' => 'required|integer',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'token_firebase' => 'string',
+            'want_is_admin' => 'boolean',
         ]);
     }
 
@@ -85,13 +87,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name' => $data['name'],
             'fabric_id' => $data['fabric_id'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'is_admin_wanted' => $data['want_is_admin'],
         ]);
+
 
         if (isset($data['token_firebase'])) {
             $this->notificationsRepository->subscribe($data["token_firebase"], $user->id, 'all');

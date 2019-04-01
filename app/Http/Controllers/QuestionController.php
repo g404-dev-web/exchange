@@ -121,7 +121,6 @@ class QuestionController extends Controller
 
         $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
 
-//        dd($userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : []);
         $userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : [];
 
         $Parsedown = new Parsedown();

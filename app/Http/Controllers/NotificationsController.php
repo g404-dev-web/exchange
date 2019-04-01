@@ -23,13 +23,11 @@ class NotificationsController extends Controller
                         ->orderBy('answers.created_at', 'desc')
                         ->first();
 
-
         $questionUser = DB::table('users')
                         ->join('questions', 'users.id', '=', 'questions.user_id')
                         ->where('questions.id', $question_id)
                         ->select('users.*', 'questions.*')
                         ->first();
-
 
         Notification::route('fcm', [$firebaseToken])->notify(new WebPushNotificationReply($answerUser, $questionUser));
 

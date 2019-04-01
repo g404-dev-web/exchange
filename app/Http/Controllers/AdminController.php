@@ -34,11 +34,12 @@ class AdminController extends Controller
 
     public function users()
     {
-        $fabric_id_admin = Auth::user()->fabric_id;
-        $users = $this->userRepository->all()->where('fabric_id', $fabric_id_admin);
-        $fabric_admin = $this->fabricRepository->fabricAdmin($fabric_id_admin)->first();
+        $users = $this->userRepository->all()->where('fabric_id', Auth::user()->fabric_id);
+        $fabricAdmin = Auth::user()->fabric->name;
+        $wantedAdmin = $this->userRepository->wantedIsAdmin()->get();
+        $fabrics = $this->fabricRepository->allFabrics();
 
-        return view('admin/users', compact('users', 'fabric_admin'));
+        return view('admin/users', compact('users', 'fabricAdmin', 'wantedAdmin', 'fabrics'));
     }
 
     public function userLogin($userId)
@@ -85,14 +86,42 @@ class AdminController extends Controller
 
     public function updateQuestion(Request $request)
     {
-            $question = $this->questionRepository->show($request['questionId']);
-            $question->title = $request['title'];
-            $question->description = $request['description'];
-            $question->category = $request['category'];
-            $question->save();
+        $question = $this->questionRepository->show($request['questionId']);
+        $question->title = $request['title'];
+        $question->description = $request['description'];
+        $question->category = $request['category'];
+        $question->save();
 
-            return redirect()
-                ->route('questions.show', ['id' => $question->id])
-                ->with('flash_message', 'Question updated !');
+        return redirect()
+            ->route('questions.show', ['id' => $question->id])
+            ->with('flash_message', 'Question updated !');
+    }
+
+    public function addFabric(Request $request)
+    {
+        $requestFabric = $request->all();
+
+        $this->fabricRepository->create($requestFabric);
+
+        return redirect()->back()->with('success', 'La fabrique ' . $request['name'] . 'a bien été ajouté');
+    }
+
+    public function approvedAdmin($userId)
+    {
+        $user = $this->userRepository->wantedIsAdmin()->where('users.id', $userId)->first();
+        $user->is_admin = 1;
+        $user->is_admin_wanted = 0;
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function refusedAdmin($userId)
+    {
+        $user = $this->userRepository->wantedIsAdmin()->where('users.id', $userId)->first();
+        $user->is_admin_wanted = 0;
+        $user->save();
+
+        return redirect()->back();
     }
 }

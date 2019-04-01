@@ -40,7 +40,7 @@
                         <form method="POST" action="{{ route('deleteAnswer') }}" class="btn-block-admin">
                             {{ csrf_field() }}
                             <input type="hidden" value="{{$answer->id}}" name="answerId">
-                            <button class="btn btn-admin mb-2" type="submit" data-toggle="tooltip" data-placement="top" title="Supprimer la question"
+                            <button class="btn btn-admin" type="submit" data-toggle="tooltip" data-placement="top" title="Supprimer la question"
                                     onclick="return confirm('Confirmer la suppression ?')">
                                 <i class="fas fa-trash"></i>
                             </button>
@@ -50,15 +50,18 @@
                     <div class="clearfix"></div>
 
                     <div class="d-inline-flex flex-column">
-                        <div class="font-weight-bold">{{ $answer->user->name }}</div>
+                        <div class="mb-2 mt-2">
+                            <em class="text-muted">{{ $answer->created_at->diffForHumans() }} par </em><b>{{ $answer->user->name }}</b>
+                        </div>
+                            {{--<div class="font-weight-bold">{{ $answer->user->name }}</div>--}}
                         <div class="text-muted mt-0 mb-1">Karma : {{ $answer->user->points }}</div>
                     </div>
 
-                     <div class="date-answer"  >
+                     {{--<div class="date-answer"  >
                         <div class="text-muted">
                             <i class="far fa-clock"></i> {{ $answer->created_at }}<a href="#comment-{{$answer->id}}" > <i class="fas fa-link"></i></a>
                         </div>
-                    </div>
+                    </div>--}}
 
                     <div class="clearfix"></div>
 
@@ -76,7 +79,7 @@
                             </li>
                         @endif
 
-                        @if(in_array($answer->id, $userQuestionPreviousVotes))
+                        @if(in_array($answer->id, $userAnswerPreviousVotes))
                             <li class="list-unstyled my-1">
                                 <input type="submit" value="▲"
                                        class="upVoted"

@@ -15,7 +15,7 @@ class AddNotificationsSubscribersForeignKeysTable extends Migration
     {
         Schema::table('notifications_subscribers', function(Blueprint $table) {
             $table->foreign('question_id')->references('id')->on('questions')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onDelete('cascade')

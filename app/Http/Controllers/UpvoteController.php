@@ -30,7 +30,6 @@ class UpvoteController extends Controller
      */
     public function store(StoreUpvote $request)
     {
-        
         $requestData = $request->all();
         
         $this->upvoteRepository->create($requestData);

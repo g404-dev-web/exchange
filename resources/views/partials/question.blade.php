@@ -25,24 +25,18 @@
                     <form method="post" action="{{ route('questionLock') }}" class="btn-admin">
                         {{ csrf_field() }}
                         <input type="hidden" name="question_id" value="{{ $question->id }}">
-                        <button type="submit" id="submit" class="btn" data-toggle="tooltip" data-placement="top" title="Fermer la question">
-                            <i class="fas fa-times"></i>
+                        <button type="submit" id="submit" class="btn" data-toggle="tooltip" data-placement="top" title="Fermer la question"
+                                onclick="return confirm('Confirmer la fermeture de la question ?')">
+                                <i class="fas fa-lock"></i>
                         </button>
                     </form>
-                {{--<div class="btn-admin">
-                    {!! Form::open(['action' => 'AdminController@lockQuestion', 'method' => 'post']) !!}
-                    {!! Form::hidden('question_id', $question->id) !!}
-                    {!! Form::submit('Fermer cette question', ['id' => 'submit', 'class' => 'btn']) !!}
-                    {!! Form::close() !!}
-                </div>--}}
                 <hr>
             @endif
         </div>
 
+        <div class="mb-2 mt-2 clearfix">
+            <em class="text-muted">{{ $question->created_at->diffForHumans() }} par </em><b>{{ $question->user->name }}</b>, <span class="text-muted mt-0 mb-1">Karma : {{ $question->user->points }}</span>
 
-
-        <div class="card-subtitle mb-2 mt-2 text-muted clearfix">
-            <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
         </div>
 
         <hr>
