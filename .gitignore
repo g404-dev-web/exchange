@@ -4,3 +4,6 @@ composer.lock
 .idea
 node_modules
 /storage/*.index
+/public/js/
+/public/css/
+/public/mix-manifest.json
