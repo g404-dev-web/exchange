@@ -39,11 +39,11 @@ Route::resource('upvotes', 'UpvoteController')->only([
     'store'
 ]);
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/admin/users',  'AdminController@users')->name('admin.users' );
-Route::get('/admin/users/{id}/login',  'AdminController@userLogin')->name('admin.user.login' );
-Route::get('/admin/users/{id}/delete',  'AdminController@userDelete')->name('admin.user.delete' );
+Route::get('/admin/users', 'AdminController@users')->name('admin.users');
+Route::get('/admin/users/{id}/login', 'AdminController@userLogin')->name('admin.user.login');
+Route::get('/admin/users/{id}/delete', 'AdminController@userDelete')->name('admin.user.delete');
 
 Route::post('/delete_question', 'AdminController@deleteQuestion')->name('deleteQuestion');
 Route::post('/delete_answer', 'AdminController@deleteAnswer')->name('deleteAnswer');

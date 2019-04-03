@@ -11,7 +11,6 @@ use App\Repositories\NotificationsRepository;
 use Illuminate\Notifications;
 use App\Repositories\FabricRepository;
 
-
 class RegisterController extends Controller
 {
     /*
@@ -47,7 +46,7 @@ class RegisterController extends Controller
      */
     public function __construct(NotificationsRepository $notificationsRepository, FabricRepository $fabricRepository)
     {
-	    parent::__construct();
+        parent::__construct();
         $this->middleware('guest');
         $this->notificationsRepository = $notificationsRepository;
         $this->fabricRepository = $fabricRepository;
@@ -70,7 +69,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255|unique:users',
-            'fabric_id' => 'required|integer',
+            'fabric_ids' => 'required',
+            'fabric_ids.*' => 'required|integer',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'token_firebase' => 'string',
@@ -85,13 +85,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name' => $data['name'],
-            'fabric_id' => $data['fabric_id'],
+            'fabric_id' => $data['fabric_ids'][0],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $user->fabrics()->attach($data['fabric_ids']);
 
         if (isset($data['token_firebase'])) {
             $this->notificationsRepository->subscribe($data["token_firebase"], $user->id, 'all');

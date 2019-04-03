@@ -46,12 +46,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Upvote');
     }
 
-    public function fabric()
+    public function fabrics()
     {
-        return $this->belongsTo('App\Fabric');
+        return $this->belongsToMany('App\Fabric');
     }
 
-    public function getAvatar( $size = 64 ) {
-        return $this->getGravatar( $this->email, $size );
+    public function getAvatar($size = 64)
+    {
+        return $this->getGravatar($this->email, $size);
     }
 }
