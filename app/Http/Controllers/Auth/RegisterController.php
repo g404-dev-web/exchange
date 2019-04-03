@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repositories\NotificationsRepository;
-use Illuminate\Notifications;
 use App\Repositories\FabricRepository;
 
 class RegisterController extends Controller
@@ -90,6 +89,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
         $user->fabrics()->attach($data['fabric_ids']);
 
         if (isset($data['token_firebase'])) {

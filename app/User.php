@@ -6,6 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Rackbeat\UIAvatars\HasAvatar;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @method static create(array $array)
+ */
 class User extends Authenticatable
 {
     use HasAvatar, Notifiable;
@@ -48,7 +51,7 @@ class User extends Authenticatable
 
     public function fabrics()
     {
-        return $this->belongsToMany('App\Fabric');
+        return $this->belongsToMany('App\Fabric')->withTimestamps();
     }
 
     public function getAvatar($size = 64)

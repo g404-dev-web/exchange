@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Question;
+use App\User;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Parsedown;
@@ -37,11 +38,13 @@ class QuestionRepository extends Repository
         $questions = $this->getModel();
 
         if(isset($params["fabric_id"])) {
+
             $questions = $questions
                 ->with('answers', 'upvotes', 'user')
                 ->join('users',"questions.user_id", '=', 'users.id')
-                ->select('questions.*', 'users.name', 'users.fabric_id')
-                ->where('users.fabric_id', $params["fabric_id"])
+                ->join('fabric_user', 'users.id', '=', 'fabric_user.user_id')
+                ->select('questions.*', 'users.name', 'fabric_user.fabric_id')
+                ->where('fabric_user.fabric_id', $params["fabric_id"])
                 ->orderBy('questions.created_at', 'desc');
         }
 

@@ -34,8 +34,13 @@ class Fabric extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    public function user()
+    /*public function user()
     {
         return $this->hasmany('App\User');
+    }*/
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
     }
 }
