@@ -4,3 +4,4 @@ composer.lock
 .idea
 node_modules
 /storage/*.index
+htdocs
