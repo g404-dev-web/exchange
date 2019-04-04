@@ -56,6 +56,10 @@
                 window.scrollTo(1000, 0);
             }
 
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+
         </script>
 
         @yield('scripts')

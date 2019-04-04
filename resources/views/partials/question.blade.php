@@ -1,6 +1,37 @@
+
 <div class="card mt-3 shadow-sm">
     <div class="card-body">
+        @if(Request::is('questions/user'))
+            @if(isset($subscriberReply[$question->id]))
+                <form action="{{ route('profil.editNotification') }}" method="post" class="mb-3 notificationQuestionUser" id="registerForm">
+                    {{ csrf_field() }}
+                    <div class="form-control py-2 col-6">
+                        <div class="custom-control custom-checkbox">
+                            <input autocomplete="off" class="custom-control-input " type="checkbox" name="token_firebase" value="" id="disableCheckboxNotification">
+                            <label class="custom-control-label " for="disableCheckboxNotification">Ne plus recevoir des notifications pour cette question ?</label>
+                        </div>
+                        <input type="hidden" name="question_id" value="{{ $question->id }}">
+                        <button type="submit" class="btn colorBackgroundSimplon btn-notif">Envoyer</button>
+                    </div>
+
+                </form>
+            @endif
+
+            @if(!isset($subscriberReply[$question->id]))
+                <form action="" class="mb-3">
+                    {{ csrf_field() }}
+                    <div class="form-control py-2 col-6">
+                        <div class="custom-control custom-checkbox">
+                            <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'question'})" id="checkboxNotification">
+                            <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications pour cette question ?</label>
+                        </div>
+                        <button type="submit" class="btn colorBackgroundSimplon btn-notif">Envoyer</button>
+                    </div>
+                </form>
+            @endif
+        @endif
         <a class="card-link title-card colorTextSimplon" href="{{ url('/questions/'.$question->id) }}">{{ $question->title }}</a>
+
         <div class="btn-block-admin">
             @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
                 <form method="POST" action="{{ route('questionEdit') }}" class="btn-admin ">
@@ -25,24 +56,18 @@
                     <form method="post" action="{{ route('questionLock') }}" class="btn-admin">
                         {{ csrf_field() }}
                         <input type="hidden" name="question_id" value="{{ $question->id }}">
-                        <button type="submit" id="submit" class="btn" data-toggle="tooltip" data-placement="top" title="Fermer la question">
-                            <i class="fas fa-times"></i>
+                        <button type="submit" id="submit" class="btn" data-toggle="tooltip" data-placement="top" title="Fermer la question"
+                                onclick="return confirm('Confirmer la fermeture de la question ?')">
+                                <i class="fas fa-lock"></i>
                         </button>
                     </form>
-                {{--<div class="btn-admin">
-                    {!! Form::open(['action' => 'AdminController@lockQuestion', 'method' => 'post']) !!}
-                    {!! Form::hidden('question_id', $question->id) !!}
-                    {!! Form::submit('Fermer cette question', ['id' => 'submit', 'class' => 'btn']) !!}
-                    {!! Form::close() !!}
-                </div>--}}
                 <hr>
             @endif
         </div>
 
+        <div class="mb-2 mt-2 clearfix">
+            <em class="text-muted">{{ $question->created_at->diffForHumans() }} par </em><b>{{ $question->user->name }}</b>, <span class="text-muted mt-0 mb-1">Karma : {{ $question->user->points }}</span>
 
-
-        <div class="card-subtitle mb-2 mt-2 text-muted clearfix">
-            <em>{{ $question->created_at->diffForHumans() }}</em> par <span class="color">{{ $question->user->name }}</span>
         </div>
 
         <hr>

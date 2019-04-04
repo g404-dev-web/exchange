@@ -14,6 +14,10 @@
 
 <link rel="stylesheet" href="{{ asset('/css/simplon-style.css') }}">
 
+<!-- Appzi: Capture Insightful Feedback -->
+<script async src="https://app.appzi.io/bootstrap/bundle.js?token=5U9Jj"></script>
+<!-- End Appzi -->
+
 {{-- <!-- Mobile Specific Metas --> --}}
 {{-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 

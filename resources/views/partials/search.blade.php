@@ -18,7 +18,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text label" id="basic-addon1"><i class="fas fa-pencil-alt"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="search" aria-label="Username" aria-describedby="basic-addon1" value="Recherche une question, tu es sur de trouver une réponse." onfocus="if(this.value=='Recherche une question, tu es sur de trouver une réponse.')this.value='';" onblur="if(this.value=='')this.value='Recherche une question, tu es sur de trouver une réponse.';">
+                        <input type="text" class="form-control" name="search" aria-label="Username" aria-describedby="basic-addon1" value="Rechercher une question" onfocus="if(this.value==='Rechercher une question')this.value='';" onblur="if(this.value=='')this.value='Rechercher une question';">
                         <div class="input-group-append">
                             <button class="btn btn-custom colorBackgroundSimplon" type="submit" id="button-addon2">Rechercher</button>
                         </div>

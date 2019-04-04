@@ -122,7 +122,37 @@ var simplemde = new SimpleMDE({
 	renderingConfig: {
 		codeSyntaxHighlighting: true,
 	},
-	showIcons: ["code", "table"]
+    showIcons: ["code", "table"],
+    // status: ["autosave", "lines", "words", "cursor", {
+	// 	className: "characters",
+	// 	defaultValue: function(el) {
+	// 		el.innerHTML = "0";
+	// 	},
+	// 	onUpdate: function(el) {
+	// 		el.innerHTML = simplemde.value().length;
+	// 	}
+    // }]
+    status: [ {
+                className: "chars",
+                defaultValue: function(el) {
+                    el.innerHTML = "0 / "+char_limit;
+                },
+                onUpdate: function(el) {
+                    el.innerHTML = simplemde.value().length + " / "+char_limit;
+                    limit_characters()
+                }
+            }]
+
 });
+
+function limit_characters() {
+            character_count = simplemde.value().length
+
+            if (character_count > char_limit) {
+                $('#submitBtn').attr("disabled", true);
+            } else {
+                $('#submitBtn').attr("disabled", false);
+            }
+        }
 </script>
 @endsection

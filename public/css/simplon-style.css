@@ -132,7 +132,7 @@ body {
 }
 
 .navbar {
-    padding: 15px 0px;
+    padding: 15px 0;
     background-color: #2F3239;
 }
 
@@ -223,7 +223,7 @@ input[type="checkbox"]:focus,
     transition: all 0.4s;
 }
 
-.btn-custom:hover, .btn-custom:active {
+.btn-custom:hover, .btn-custom:active, .btn-notif:hover, .btn-notif:active {
     background-color: black;
     color: white;
 }
@@ -313,10 +313,6 @@ input[type="checkbox"]:focus,
 .upVoted {
     background-color: #f3f3f3;
     cursor: default !important;
-}
-
-input[title~="vous avez déjà upvoté"] {
-    border: 5px solid yellow;
 }
 
 .nbVotes {
@@ -534,12 +530,12 @@ footer {
 
 
 /*Upvote*/
-.question-vote-up{
+.question-vote-up, .upvote {
     background-color: black;
     color: #f3f3f3!important;
     transition: all 0.4s;
 }
-.question-vote-up:hover{
+.question-vote-up:hover, .upvote:hover  {
     background-color: var(--colorSimplon);
     color: white!important;
 }
@@ -564,4 +560,17 @@ footer {
     background-color: black;
     color: white;
     border: black;
+}
+
+
+/*--------------------questions/user---------------------- */
+
+.notificationQuestionUser {
+    position: relative;
+}
+
+.btn-notif {
+    position: absolute;
+    top: -1px;
+    right: -90px;
 }

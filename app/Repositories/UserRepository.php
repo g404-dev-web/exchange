@@ -14,4 +14,9 @@ class UserRepository extends Repository
     {
         return $this->model->all();
     }
+
+    public function wantedIsAdmin()
+    {
+        return $this->model->join('fabrics', 'users.fabric_id', '=', 'fabrics.id')->select('fabrics.name as fabricName', 'users.*')->where('is_admin_wanted', '=', 1);
+    }
 }

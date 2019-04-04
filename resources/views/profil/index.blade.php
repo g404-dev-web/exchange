@@ -22,12 +22,12 @@
                 </div>
             </div>
             <div class="col-12 col-sm-4 align-self-center">
-                <h2 class="colorTextSimplon">Bonjour, {{ $user->name }} !</h4>
-                <h6>Aujourd'hui tu as {{ $user->points }} points de Karma</h4>
+                <h2 class="colorTextSimplon">Bonjour, {{ $user->name }} !</h2>
+                <h6>Aujourd'hui tu as {{ $user->points }} points de Karma</h6>
                 <p>Tes fabriques :
-                @foreach($user->fabrics as $fabric)
-                <span class="underlineText">{{$fabric->name}}</span>
-                @endforeach
+                    @foreach($user->fabrics as $fabric)
+                        <span class="underlineText">{{$fabric->name}}</span>
+                    @endforeach
                 </p>
             </div>
             <div class="col-12 col-sm-6 align-self-center">
@@ -51,6 +51,7 @@
                     <div class="align-self-center">
                         <h2 class="colorTextSimplon text-center pb-3">Mon profil</h2>
                         <hr class="pb-3">
+                        <h4>Mettre à jour mon profil :</h4>
                         <form method="POST" action="{{ route('profil.editProfil') }}">
                             {{ csrf_field() }}
                             <div class="input-group mb-3">
@@ -130,6 +131,11 @@
                             </div>
 
                             <input type="submit" value="Mettre à jour" class="btn btn-custom btn-block colorBackgroundSimplon">
+                        </form>
+
+                        <h4>Notifications :</h4>
+                        <form action="">
+
                         </form>
                     </div>
                 </div>

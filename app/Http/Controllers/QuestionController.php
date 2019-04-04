@@ -11,6 +11,7 @@ use App\Repositories\QuestionRepository;
 use Auth;
 use Parsedown;
 use Illuminate\Http\Request;
+use App\NotificationsSubscriber;
 
 class QuestionController extends Controller
 {
@@ -56,7 +57,14 @@ class QuestionController extends Controller
         $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
         $recentQuestions = $this->questionRepository->getRecent(2);
 
-        return view('question.user', compact('questions', 'recentQuestions', 'userQuestionPreviousVotes', 'questionsCount', 'answersCount'));
+
+        foreach ($questions as $question) {
+            if($question->notification->isNotEmpty()) {
+                $subscriberReply[$question->id] = $question->notification->first();
+            }
+        }
+
+        return view('question.user', compact('questions', 'recentQuestions', 'userQuestionPreviousVotes', 'questionsCount', 'answersCount', 'subscriberReply'));
     }
 
     /**
@@ -121,7 +129,6 @@ class QuestionController extends Controller
 
         $userQuestionPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('question_id')->all() : [];
 
-//        dd($userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : []);
         $userAnswerPreviousVotes = auth()->check() ? auth()->user()->upvotes->pluck('answer_id')->all() : [];
 
         $Parsedown = new Parsedown();

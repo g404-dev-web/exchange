@@ -11,11 +11,7 @@ class FabricRepository extends Repository
 
     public function allFabrics()
     {
-        return $this->model->get();
-    }
-
-    public function fabricAdmin($fabric_id_admin) {
-        return $this->model->where('id', $fabric_id_admin)->get();
+        return $this->model->orderBy('name', 'asc')->get();
     }
 
 }

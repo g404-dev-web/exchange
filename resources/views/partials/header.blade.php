@@ -76,6 +76,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/login') }}">Connexion</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/register') }}" class="nav-link">Inscription</a>
+                            </li>
                         @endif
                     </div>
                 </ul>

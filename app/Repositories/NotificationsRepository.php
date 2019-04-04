@@ -29,4 +29,6 @@ class NotificationsRepository extends Repository
                                 ['type', '=', 'question']
                             ])->get();
     }
+
+
 }
