@@ -66,7 +66,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        dump('ppl');
         return Validator::make($data, [
             'name' => 'required|string|max:255|unique:users',
             'fabric_ids.*' => 'required|integer',

@@ -44,8 +44,7 @@ class LoginController extends Controller
         if($request)
 
             if($request->session()->get('url.intended') === 'https://exchange.loc/upvotes') {
-                dd('ppl');
-                return redirect('/')->with('status', 'Tu peux maintenant voter pour la question ou réponse');
+                return redirect('/')->with('status', 'Tu peux maintenant upvoter pour la question ou réponse');
             }
 
         return redirect()->intended();
