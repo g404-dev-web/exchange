@@ -7,6 +7,7 @@ use App\NotificationsSubscriber;
 use App\Question;
 use App\Repositories\AnswerRepository;
 use App\Repositories\FabricRepository;
+use App\Repositories\NotificationsRepository;
 use App\Upvote;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -20,16 +21,19 @@ class HomeController extends Controller
     protected $questionRepository;
     protected $fabricRepository;
     protected $answerRepository;
+    protected $notificationsRepository;
 
     public function __construct(
         QuestionRepository $questionRepository,
         FabricRepository $fabricRepository,
-        AnswerRepository $answerRepository
+        AnswerRepository $answerRepository,
+        NotificationsRepository $notificationsRepository
     ) {
         parent::__construct();
         $this->questionRepository = $questionRepository;
         $this->fabricRepository = $fabricRepository;
         $this->answerRepository = $answerRepository;
+        $this->notificationsRepository = $notificationsRepository;
     }
 
     /**
@@ -85,7 +89,9 @@ class HomeController extends Controller
 
             $answers_is_selected = count($this->answerRepository->answerSelected($user->id));
 
-            return view('profil.index', compact('user', 'answers_is_selected'));
+            $notificationAll = $user->notifications()->where('type', 'all')->get()->isNotEmpty();
+
+            return view('profil.index', compact('user', 'answers_is_selected', 'notificationAll'));
         }
 
         return redirect('/login');
@@ -102,9 +108,13 @@ class HomeController extends Controller
             $request->user()->fill([
                 'password' => Hash::make($request->new_password)
             ])->save();
+        }
+
+        if(isset($request->token_firebase)) {
+            $this->notificationsRepository->subscribe($request->token_firebase, $user->id, 'all');
         } else {
-            dd('bug');
-            return back();
+            $subscribeAll = NotificationsSubscriber::where('user_id', Auth::id())->where('type', 'all')->first();
+            $subscribeAll->delete();
         }
 
         return back();
@@ -113,11 +123,15 @@ class HomeController extends Controller
 
     public function editNotificationReply(Request $request)
     {
-        $subscriberNotificationReply = NotificationsSubscriber::where('user_id', Auth::user()->id)->where('question_id', $request->question_id)->first();
+        if(empty($request->token_firebase)) {
+            $subscriberNotificationReply = NotificationsSubscriber::where('user_id', Auth::id())->where('question_id', $request->question_id)->first();
+            $subscriberNotificationReply->delete();
+        }  else {
+            $this->notificationsRepository->subscribe($request->token_firebase, Auth::id(), 'question', $request->question_id);
 
+        }
 
-        dd($subscriberNotificationReply);
-        dd($request->all());
+        return back();
     }
 
     private function generatePoints()

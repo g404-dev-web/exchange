@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.45 on 2019-03-19 10:05:56.
+ * Generated for Laravel 5.5.45 on 2019-04-04 14:46:58.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15567,9 +15567,6 @@ namespace  {
 
     class Artisan extends \Illuminate\Support\Facades\Artisan {}
 
-    /**
-     * @method static routes()
-     */
     class Auth extends \Illuminate\Support\Facades\Auth {}
 
     class Blade extends \Illuminate\Support\Facades\Blade {}

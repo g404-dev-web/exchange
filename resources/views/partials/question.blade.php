@@ -3,12 +3,12 @@
     <div class="card-body">
         @if(Request::is('questions/user'))
             @if(isset($subscriberReply[$question->id]))
-                <form action="{{ route('profil.editNotification') }}" method="post" class="mb-3 notificationQuestionUser" id="registerForm">
+                <form action="{{ route('profil.editNotification') }}" method="post" class="mb-3 notificationQuestionUser">
                     {{ csrf_field() }}
                     <div class="form-control py-2 col-6">
                         <div class="custom-control custom-checkbox">
-                            <input autocomplete="off" class="custom-control-input " type="checkbox" name="token_firebase" value="" id="disableCheckboxNotification">
-                            <label class="custom-control-label " for="disableCheckboxNotification">Ne plus recevoir des notifications pour cette question ?</label>
+                            <input autocomplete="off" class="custom-control-input " type="checkbox" name="token_firebase" value="" id="disableCheckboxNotification{{ $question->id }}">
+                            <label class="custom-control-label " for="disableCheckboxNotification{{ $question->id }}">Ne plus recevoir des notifications pour cette question ?</label>
                         </div>
                         <input type="hidden" name="question_id" value="{{ $question->id }}">
                         <button type="submit" class="btn colorBackgroundSimplon btn-notif">Envoyer</button>
@@ -18,13 +18,14 @@
             @endif
 
             @if(!isset($subscriberReply[$question->id]))
-                <form action="" class="mb-3">
+                <form action="{{ route('profil.editNotification') }}" method="post" class="mb-3" id="registerForm">
                     {{ csrf_field() }}
                     <div class="form-control py-2 col-6">
                         <div class="custom-control custom-checkbox">
-                            <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'question'})" id="checkboxNotification">
-                            <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications pour cette question ?</label>
+                            <input autocomplete="off" class="custom-control-input" type="checkbox"  onclick="enableNotifications(this, {type:'question'})" id="checkboxNotification{{ $question->id }}">
+                            <label class="custom-control-label " for="checkboxNotification{{ $question->id }}">Voulez-vous recevoir des notifications pour cette question ?</label>
                         </div>
+                        <input type="hidden" name="question_id" value="{{ $question->id }}">
                         <button type="submit" class="btn colorBackgroundSimplon btn-notif">Envoyer</button>
                     </div>
                 </form>

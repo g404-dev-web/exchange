@@ -21,10 +21,7 @@
     // Add the public key generated from the console here.
     messaging.usePublicVapidKey("BEEDl4ugMHIFfYCCwONFgM8lJyVP6uyacyxSmB7-2EW_DXG7LfeKSzRVFD4qty5LD6ktvXqszhsWk3MjdKILhrE");
 
-    function enableNotifications(params) {
-
-        let checkboxNotification = document.getElementById('checkboxNotification');
-
+    function enableNotifications(checkboxNotification, params) {
         if(checkboxNotification.checked) {
 
             messaging.requestPermission().then(function () {
@@ -114,38 +111,5 @@
             });
         }
     }
-
-    /*function disableNotifications(params) {
-        let disableCheckboxNotification = document.getElementById('checkboxNotification');
-        console.log(disableCheckboxNotification);
-
-        const nullInputString = '<input type="hidden" id="token" name="token_firebase" value="">';
-
-        if(params.type === "all") {
-            $('#registerForm').append(nullInputString);
-        }
-        else if (params.type === "question") {
-            $('#registerForm').append(nullInputString);
-        } else {
-
-            fetch('/notifications/question/'+params.question_id, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({token_firebase: token })
-            }).then(function (response) {
-                return response.json();
-            }).then(function (json) {
-                if(json.is_subscribed === 1) {
-                    console.log("User has been subscribed to notifications.")
-                }
-                else {
-                    console.log("Error while subscribing user to notifications. "+token)
-                }
-            });
-        }
-    }*/
 
 </script>

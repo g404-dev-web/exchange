@@ -51,8 +51,8 @@
                     <div class="align-self-center">
                         <h2 class="colorTextSimplon text-center pb-3">Mon profil</h2>
                         <hr class="pb-3">
-                        <h4>Mettre à jour mon profil :</h4>
-                        <form method="POST" action="{{ route('profil.editProfil') }}">
+                        <h4 class="my-3">Mettre à jour mon profil :</h4>
+                        <form method="POST" action="{{ route('profil.editProfil') }}" id="registerForm">
                             {{ csrf_field() }}
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -120,7 +120,7 @@
                                                 <i class="fas fa-fingerprint"></i>
                                             </span>
                                         </div>
-                                        <input class="form-control input-connexion" type="password" name="password_confirmation" placeholder="Répéter votre Nouveau mot de passe" aria-describedby="basic-addon1">
+                                        <input class="form-control input-connexion" type="password" name="password_confirmation" placeholder="Répéter votre nouveau mot de passe" aria-describedby="basic-addon1">
                                         @if ($errors->has('password'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('password') }}</strong>
@@ -129,14 +129,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <h4 class="my-3">Notifications :</h4>
+                            <div class="form-control py-2">
+                                <div class="custom-control custom-checkbox">
+                                    @if(!$notificationAll)
+                                        <input autocomplete="off" class="custom-control-input" type="checkbox"  onclick="enableNotifications(this, {type:'all'})" id="checkboxNotification">
+                                        <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications tous les jours ?</label>
+                                    @else
+                                        <input autocomplete="off" class="custom-control-input" type="checkbox" value="" name="token_firebase" id="checkboxNotification">
+                                        <label class="custom-control-label " for="checkboxNotification">Ne plus recevoir des notifications tous les jours ?</label>
+                                    @endif
 
-                            <input type="submit" value="Mettre à jour" class="btn btn-custom btn-block colorBackgroundSimplon">
+                                </div>
+                            </div>
+                            <input type="submit" value="Mettre à jour" class="btn btn-custom btn-block colorBackgroundSimplon my-4">
                         </form>
 
-                        <h4>Notifications :</h4>
-                        <form action="">
 
-                        </form>
+
                     </div>
                 </div>
             </div>
@@ -182,8 +192,6 @@
 let nbQuestions = {{ json_encode(count($user->questions)) }};
 let nbAnswers = {{ json_encode(count($user->answers)) }};
 let nbAnswersIsSelected = {{ json_encode($answers_is_selected) }};
-
-console.log(nbQuestions, nbAnswers);
 
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {

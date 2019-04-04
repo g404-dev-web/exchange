@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->getGravatar($this->email, $size);
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(NotificationsSubscriber::class);
+    }
 }

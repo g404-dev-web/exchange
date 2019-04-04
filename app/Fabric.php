@@ -4,6 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Fabric
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Fabric newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Fabric newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Fabric query()
+ * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Question[] $questions
+ */
 class Fabric extends Model
 {
     /**
@@ -42,5 +52,10 @@ class Fabric extends Model
     public function users()
     {
         return $this->belongsToMany('App\User');
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
     }
 }
