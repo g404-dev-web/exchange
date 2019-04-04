@@ -1,7 +1,5 @@
 <?php
 
-use App\Notifications\SomeNotifications;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +22,7 @@ Route::get('/', 'HomeController@index');
 Route::get('questions/user', 'QuestionController@user')->name('questions.user');
 Route::get('profil/user', 'HomeController@profil')->name('profil.user');
 Route::post('profil/edit', 'HomeController@editProfil')->name('profil.editProfil');
+Route::post('questions/user/edit', 'HomeController@editNotificationReply')->name('profil.editNotification');
 
 
 Route::resource('questions', 'QuestionController')->only([

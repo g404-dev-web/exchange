@@ -59,6 +59,6 @@ class Question extends Model
     }
 
     public function notification() {
-        return $this->hasMany(App\Notification::class);
+        return $this->hasMany('App\NotificationsSubscriber');
     }
 }

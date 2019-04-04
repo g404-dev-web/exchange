@@ -132,7 +132,7 @@ body {
 }
 
 .navbar {
-    padding: 15px 0px;
+    padding: 15px 0;
     background-color: #2F3239;
 }
 
@@ -223,7 +223,7 @@ input[type="checkbox"]:focus,
     transition: all 0.4s;
 }
 
-.btn-custom:hover, .btn-custom:active {
+.btn-custom:hover, .btn-custom:active, .btn-notif:hover, .btn-notif:active {
     background-color: black;
     color: white;
 }
@@ -560,4 +560,17 @@ footer {
     background-color: black;
     color: white;
     border: black;
+}
+
+
+/*--------------------questions/user---------------------- */
+
+.notificationQuestionUser {
+    position: relative;
+}
+
+.btn-notif {
+    position: absolute;
+    top: -1px;
+    right: -90px;
 }

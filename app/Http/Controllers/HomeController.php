@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Answer;
+use App\NotificationsSubscriber;
 use App\Question;
 use App\Repositories\AnswerRepository;
 use App\Repositories\FabricRepository;
@@ -64,7 +65,8 @@ class HomeController extends Controller
     }
 
 
-    public function profil(){
+    public function profil()
+    {
         if (Auth::check()) {
             $user = Auth::user();
 
@@ -77,9 +79,8 @@ class HomeController extends Controller
 
     }
 
-    public function editProfil(Request $request){
-
-
+    public function editProfil(Request $request)
+    {
         $user = Auth::user();
         $user->name = $request['name'];
         $user->name = $request['name'];
@@ -94,9 +95,17 @@ class HomeController extends Controller
             return back();
         }
 
-
         return back();
 //        return view('profil.index', compact('user'));
+    }
+
+    public function editNotificationReply(Request $request)
+    {
+        $subscriberNotificationReply = NotificationsSubscriber::where('user_id', Auth::user()->id)->where('question_id', $request->question_id)->first();
+
+
+        dd($subscriberNotificationReply);
+        dd($request->all());
     }
 
     private function generatePoints()

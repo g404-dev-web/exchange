@@ -1,6 +1,37 @@
+
 <div class="card mt-3 shadow-sm">
     <div class="card-body">
+        @if(Request::is('questions/user'))
+            @if(isset($subscriberReply[$question->id]))
+                <form action="{{ route('profil.editNotification') }}" method="post" class="mb-3 notificationQuestionUser" id="registerForm">
+                    {{ csrf_field() }}
+                    <div class="form-control py-2 col-6">
+                        <div class="custom-control custom-checkbox">
+                            <input autocomplete="off" class="custom-control-input " type="checkbox" name="token_firebase" value="" id="disableCheckboxNotification">
+                            <label class="custom-control-label " for="disableCheckboxNotification">Ne plus recevoir des notifications pour cette question ?</label>
+                        </div>
+                        <input type="hidden" name="question_id" value="{{ $question->id }}">
+                        <button type="submit" class="btn colorBackgroundSimplon btn-notif">Envoyer</button>
+                    </div>
+
+                </form>
+            @endif
+
+            @if(!isset($subscriberReply[$question->id]))
+                <form action="" class="mb-3">
+                    {{ csrf_field() }}
+                    <div class="form-control py-2 col-6">
+                        <div class="custom-control custom-checkbox">
+                            <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'question'})" id="checkboxNotification">
+                            <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications pour cette question ?</label>
+                        </div>
+                        <button type="submit" class="btn colorBackgroundSimplon btn-notif">Envoyer</button>
+                    </div>
+                </form>
+            @endif
+        @endif
         <a class="card-link title-card colorTextSimplon" href="{{ url('/questions/'.$question->id) }}">{{ $question->title }}</a>
+
         <div class="btn-block-admin">
             @if(Auth::check() && Auth::user()->is_admin == 1 && Auth::user()->fabric_id == $question->user->fabric_id)
                 <form method="POST" action="{{ route('questionEdit') }}" class="btn-admin ">
