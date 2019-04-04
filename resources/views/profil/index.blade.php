@@ -24,7 +24,11 @@
             <div class="col-12 col-sm-4 align-self-center">
                 <h2 class="colorTextSimplon">Bonjour, {{ $user->name }} !</h2>
                 <h6>Aujourd'hui tu as {{ $user->points }} points de Karma</h6>
-                <p>Ta fabrique : <span class="underlineText">{{$user->fabric->name}}</span></p>
+                <p>Tes fabriques :
+                    @foreach($user->fabrics as $fabric)
+                        <span class="underlineText">{{$fabric->name}}</span>
+                    @endforeach
+                </p>
             </div>
             <div class="col-12 col-sm-6 align-self-center">
                 <div class="row">

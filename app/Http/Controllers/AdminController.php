@@ -29,7 +29,6 @@ class AdminController extends Controller
         $this->questionRepository = $questionRepository;
         $this->answerRepository = $answerRepository;
         $this->fabricRepository = $fabricRepository;
-
     }
 
     public function users()

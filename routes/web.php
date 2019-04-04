@@ -38,7 +38,7 @@ Route::resource('upvotes', 'UpvoteController')->only([
     'store'
 ]);
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
 Route::get('/admin/users',  'AdminController@users')->name('admin.users' );

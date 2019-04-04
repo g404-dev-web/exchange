@@ -31,8 +31,8 @@
                                     <i class="fas fa-laptop "></i>
                                 </span>
                             </div>
-                            <select name="fabric_id" class="custom-select input-connexion" required >
-                                <option value="" disabled selected>Quelles est votre fabrique Simplon ?</option>
+                            <select name="fabric_ids[]" class="custom-select input-connexion" required multiple>
+                                <option value="" disabled selected>Quelles sont vos fabriques Simplon ?</option>
                                 @foreach ( $fabrics as $fabric )
                                     <option value="{{ $fabric->id }}">{{ $fabric->name }}</option>
                                 @endforeach
