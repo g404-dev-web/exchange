@@ -98,7 +98,7 @@
 
             <div class="form-control py-2">
                 <div class="custom-control custom-checkbox">
-                    <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications({type:'question'})" id="checkboxNotification">
+                    <input autocomplete="off" class="custom-control-input " type="checkbox"  onclick="enableNotifications(this, {type:'question'})" id="checkboxNotification">
                     <label class="custom-control-label " for="checkboxNotification">Voulez-vous recevoir des notifications quand une réponse est publiée ?</label>
                 </div>
             </div>

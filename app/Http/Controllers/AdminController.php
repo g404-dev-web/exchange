@@ -33,12 +33,18 @@ class AdminController extends Controller
 
     public function users()
     {
+        /*$fabric_id_admin = Auth::user()->fabric_id;
+        $users = $this->userRepository->all()->where('fabric_id', $fabric_id_admin);
+        $fabric_admin = $this->fabricRepository->fabricAdmin($fabric_id_admin)->first();
+
+        return view('admin/users', compact('users', 'fabric_admin'));*/
+
         $users = $this->userRepository->all()->where('fabric_id', Auth::user()->fabric_id);
-        $fabricAdmin = Auth::user()->fabric->name;
+        $fabricsAdmin = Auth::user()->fabrics()->get();
         $wantedAdmin = $this->userRepository->wantedIsAdmin()->get();
         $fabrics = $this->fabricRepository->allFabrics();
 
-        return view('admin/users', compact('users', 'fabricAdmin', 'wantedAdmin', 'fabrics'));
+        return view('admin/users', compact('users', 'fabricsAdmin', 'wantedAdmin', 'fabrics'));
     }
 
     public function userLogin($userId)
@@ -112,7 +118,7 @@ class AdminController extends Controller
         $user->is_admin_wanted = 0;
         $user->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', $user->name .' a été ajouté comme formateur');  ;
     }
 
     public function refusedAdmin($userId)
