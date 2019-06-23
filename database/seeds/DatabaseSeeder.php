@@ -3,6 +3,7 @@
 use App\Question;
 use App\User;
 use App\Fabric;
+use App\Answer;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +26,7 @@ class DatabaseSeeder extends Seeder
                             ->create(['user_id' => $user])
                             ->each(function (Question $question) {
 
-                                factory(\App\Answer::class, 2)
+                                factory(Answer::class, 2)
                                     ->create([
                                         'question_id' => $question->id,
                                         'user_id' => rand(1,10),
@@ -34,5 +35,8 @@ class DatabaseSeeder extends Seeder
                     });
             });
 
+            $this->call([
+                DevUsersSeeder::class,
+            ]);
     }
 }
