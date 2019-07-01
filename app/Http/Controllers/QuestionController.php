@@ -70,6 +70,37 @@ class QuestionController extends Controller
         return view('question.create', compact('question'));
     }
 
+    /**
+     * Allows question editing.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function editQuestion(Request $request)
+    {
+        $questionId = $request['questionId'];
+        $question = $this->questionRepository->show($questionId);
+        return view('question.create', compact('question'));
+    }
+
+    /**
+     * Updates the form requested
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateQuestion(Request $request)
+    {
+        $question = $this->questionRepository->show($request['questionId']);
+        $question->title = $request['title'];
+        $question->description = $request['description'];
+        $question->category = $request['category'];
+        $question->save();
+
+        return redirect()
+            ->route('questions.show', ['id' => $question->id])
+            ->with('flash_message', 'Question updated !');
+    }
 
     /**
      * Store a newly created resource in storage.

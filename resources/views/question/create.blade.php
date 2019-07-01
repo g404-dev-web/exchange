@@ -16,7 +16,11 @@
             <p class="card-text my-4">La précision et la rapidité de la réponse passe par une question correctement posée. Votre titre doit être explicite, votre question pas globale mais spécifique.</p>
             <p class="card-text my-4">Si vous faites face à un bug, copiez le code nécessaire à la résolution.</p>
 
+            @if(Auth::user()->is_admin)
             {!! Form::open(['action' => $question ? 'AdminController@updateQuestion' : 'QuestionController@store', 'method' => 'post', 'id' => 'registerForm']) !!}
+            @else
+            {!! Form::open(['action' => $question ? 'QuestionController@updateQuestion' : 'QuestionController@store', 'method' => 'post', 'id' => 'registerForm']) !!}
+            @endif
 
             <div class="form-group my-4">
                 {{-- <label class="required">Intitulé de la question<span class="colorTextSimplon"> *</span></label> --}}

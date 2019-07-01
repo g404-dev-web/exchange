@@ -29,6 +29,8 @@ Route::post('profil/edit', 'HomeController@editProfil')->name('profil.editProfil
 Route::resource('questions', 'QuestionController')->only([
     'index', 'create', 'store', 'show'
 ]);
+Route::post('/question/edit', 'QuestionController@editQuestion')->name('userQuestionEdit');
+Route::post('/question/edit/update', 'QuestionController@updateQuestion')->name('questionUpdate');
 
 Route::resource('answers', 'AnswerController')->only([
     'store'
@@ -47,6 +49,6 @@ Route::get('/admin/users/{id}/delete',  'AdminController@userDelete')->name('adm
 
 Route::post('/delete_question', 'AdminController@deleteQuestion')->name('deleteQuestion');
 Route::post('/delete_answer', 'AdminController@deleteAnswer')->name('deleteAnswer');
-Route::post('/question/edit', 'AdminController@editQuestion')->name('questionEdit');
-Route::post('/question/edit/update', 'AdminController@updateQuestion')->name('questionUpdate');
+Route::post('/admin/question/edit', 'AdminController@editQuestion')->name('questionEdit');
+Route::post('/admin/question/edit/update', 'AdminController@updateQuestion')->name('questionUpdate');
 Route::post('/question/lock', 'AdminController@lockQuestion')->name('questionLock');
